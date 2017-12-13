@@ -116,3 +116,10 @@ class Sys_User(models.Model):
     SortNum = models.IntegerField(verbose_name="排序")
     IsDeleted = models.BooleanField(verbose_name="是否删除")
     DateTime = models.DateTimeField(verbose_name="时间")  
+
+#用户对应角色表
+class Sys_UserRole(models.Model):
+    KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
+    RoleId  = models.CharField(max_length=50,verbose_name="角色ID")    
+    UserId   = models.CharField(max_length=50,verbose_name="用户ID")
+    DateTime = models.DateTimeField(verbose_name="时间")  
