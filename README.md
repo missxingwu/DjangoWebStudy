@@ -19,3 +19,8 @@
      2.0 将生成的py文件应用同步到数据库  python manage.py migrate （数据迁移）
      3.0 创建超级管理员 python manage.py createsuperuser (# 修改 用户密码可以用：python manage.py changepassword username)
      4.0 启动 python manage.py runserver（P.S. VS2017 可以用自带的启动直接开启项目）
+
+4.0 自定义模型
+     
+	 1.0 所有模型继承自models.Model，并且默认都有默认主键,自定义主键时加上primary_key=True，如： KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
+	 2.0 添加需要的模型后 更新（ python manage.py makemigrations  python manage.py migrate）先检查在更新到数据库
