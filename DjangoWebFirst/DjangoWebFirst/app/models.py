@@ -32,7 +32,10 @@ class Sys_Dictionary(models.Model):
     SortNum = models.IntegerField(verbose_name="排序")
     IsDeleted = models.BooleanField(verbose_name="是否删除")
     DateTime = models.DateTimeField(verbose_name="时间")
-    PIds = models.CharField(max_length=50,verbose_name="所有父级")  
+    PIds = models.CharField(max_length=50,verbose_name="所有父级")
+    class Meta:
+        verbose_name = "字典"
+        verbose_name_plural = "字典列表"
    
  #错误日志表
 class Sys_ErrorLog(models.Model):
@@ -40,6 +43,9 @@ class Sys_ErrorLog(models.Model):
     Title = models.CharField(max_length=50,verbose_name="标题")  
     ErrorMsg = models.CharField(max_length=50,verbose_name="错误详情")       
     DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "日志"
+        verbose_name_plural = "日志记录"
   
  #菜单表
 class Sys_Menu(models.Model):
@@ -53,6 +59,9 @@ class Sys_Menu(models.Model):
     SortNum = models.IntegerField(verbose_name="排序")
     IsDeleted = models.BooleanField(verbose_name="是否删除")
     DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "菜单"
+        verbose_name_plural = "菜单列表"
   
 #菜单表
 class Sys_MenuButton(models.Model):
@@ -60,6 +69,9 @@ class Sys_MenuButton(models.Model):
     MenuId = models.CharField(max_length=50,verbose_name="菜单ID")
     ButtonId = models.CharField(max_length=50,verbose_name="按钮ID")
     DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "菜单按钮"
+        verbose_name_plural = "菜单按钮列表"
 
 #组织架构表
 class Sys_Organization(models.Model):
@@ -72,6 +84,9 @@ class Sys_Organization(models.Model):
     IsDeleted = models.BooleanField(verbose_name="是否删除")
     DateTime = models.DateTimeField(verbose_name="时间")
     PIds = models.CharField(max_length=50,verbose_name="所有父级ID")
+    class Meta:
+        verbose_name = "组织架构"
+        verbose_name_plural = "组织架构列表"
 
        
 #角色表
@@ -80,7 +95,10 @@ class Sys_Role(models.Model):
     FullName = models.CharField(max_length=50,verbose_name="名称")    
     Description = models.CharField(max_length=50,verbose_name="描述")
     IsDeleted = models.BooleanField(verbose_name="是否删除")
-    DateTime = models.DateTimeField(verbose_name="时间")  
+    DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "角色"
+        verbose_name_plural = "角色列表"
 
 
 #角色对应菜单表
@@ -88,16 +106,22 @@ class Sys_RoleMenu(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
     RoleId  = models.CharField(max_length=50,verbose_name="角色ID")    
     MenuId  = models.CharField(max_length=50,verbose_name="菜单ID")
-    DateTime = models.DateTimeField(verbose_name="时间")  
+    DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "角色对应菜单"
+        verbose_name_plural = "角色对应菜单列表"
 
 
-#角色对应菜单表
+#角色对应菜单表按钮
 class Sys_RoleMenuButton(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
     RoleId  = models.CharField(max_length=50,verbose_name="角色ID")    
     MenuId  = models.CharField(max_length=50,verbose_name="菜单ID")
     ButtonId = models.CharField(max_length=50,verbose_name="按钮ID")
-    DateTime = models.DateTimeField(verbose_name="时间")  
+    DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "角色对应菜单按钮"
+        verbose_name_plural = "角色对应菜单按钮列表"
 
 #用户表
 class Sys_User(models.Model):
@@ -120,10 +144,16 @@ class Sys_User(models.Model):
     SortNum = models.IntegerField(verbose_name="排序")
     IsDeleted = models.BooleanField(verbose_name="是否删除")
     DateTime = models.DateTimeField(verbose_name="时间")  
+    class Meta:
+        verbose_name = "用户"
+        verbose_name_plural = "用户列表"
 
 #用户对应角色表
 class Sys_UserRole(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
     RoleId  = models.CharField(max_length=50,verbose_name="角色ID")    
     UserId   = models.CharField(max_length=50,verbose_name="用户ID")
-    DateTime = models.DateTimeField(verbose_name="时间")  
+    DateTime = models.DateTimeField(verbose_name="时间")
+    class Meta:
+        verbose_name = "用户角色"
+        verbose_name_plural = "用户角色列表"
