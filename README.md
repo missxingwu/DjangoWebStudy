@@ -24,3 +24,12 @@
      
 	 1.0 所有模型继承自models.Model，并且默认都有默认主键,自定义主键时加上primary_key=True，如： KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
 	 2.0 添加需要的模型后 更新（ python manage.py makemigrations  python manage.py migrate）先检查在更新到数据库
+
+5.0 自定义后台登录页面
+    
+	1.0 创建后台页面（目前用的是Django 默认用户管理登录2017.12.13），引入静态文件 列：
+	  {% load staticfiles %}
+      <link rel="icon" href="{% static 'adminApp/Image/monkey-48.ico' %}">
+      <link href="{% static 'adminApp/Login/css/login.css' %}" rel="stylesheet" />
+	2.0 form 表单数据提交 注意CSRF验证,解决方法 <form>{% csrf_token %}</from>
+	3.0 from django.contrib.auth.hashers import make_password, check_password  Django 加密解密，每次生成的密码都是一样的，加密：  make_password(PassWord)，解密：check_password("12", pwd) 明文和明文对比，返回True Or False
