@@ -16,8 +16,12 @@ class Sys_Button(models.Model):
     DateTime = models.DateTimeField(verbose_name="时间")
     #def __str__(self):
     #    return self.FullName
+
+    class Meta:
+        verbose_name = "权限按钮"
+        verbose_name_plural = "权限按钮"
      
- #按钮表
+ #字典表
 class Sys_Dictionary(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
     ParentId = models.CharField(max_length=50,verbose_name="父级")  
