@@ -120,6 +120,32 @@
 		不支持负索引 1 使用 reverse() 解决  Sys_User.objects.all().reverse()[:2] # 最后两条,2 使用 order_by 倒序  Sys_User.objects.order_by('-Account')[:20] # id最大的20条。
 		使用 .distinct() 去重
 
-8.0 Django Manager 管理器
+8.0 templates 模板
+
+    1.0 显示一个基本的字符串在网页上  {{ title }}，获取当前网址：{{ request.path }}。获取当前 GET 参数：{{ request.GET.urlencode }}。合并到一起用的一个例子：<a href="{{ request.path }}?{{ request.GET.urlencode }}&delete=1">当前网址加参数 </a>
+
+	2.0 for 循环 
+	    {% for i in TutorialList %}
+          {{ i }}
+        {% endfor %}
+		在for循环中还有很多有用的东西
+		   forloop.counter	索引从 1 开始算
+           forloop.counter0	索引从 0 开始算
+           forloop.revcounter	索引从最大长度到 1
+           forloop.revcounter0	索引从最大长度到 0
+           forloop.first	当遍历的元素为第一项时为真
+           forloop.last	当遍历的元素为最后一项时为真
+           forloop.parentloop  用在嵌套的 for 循环中，获取上一层 for 循环的 forloop
+
+		当列表中可能为空值时用 for  empty
+		  <ul>
+          {% for athlete in athlete_list %}
+              <li>{{ athlete.name }}</li>
+          {% empty %}
+              <li>抱歉，列表为空</li>
+          {% endfor %}
+          </ul>
+
+9.0 Django Manager 管理器
   
     1.0 添加额外的管理器方法 列：  Sys_Menu 模型里
