@@ -128,3 +128,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+ADMIN_SESSION='AdminSession'
+
+#session的超时时间设置
+# 先开启设置，默认是FALSE
+#SESSION_SAVE_EVERY_REQUEST=True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+#SESSION_COOKIE_AGE=60*30  有效时间 30分钟

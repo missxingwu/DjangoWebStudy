@@ -71,7 +71,7 @@
             $.post("/adminlogin", $("#form1").serialize(),
             function (data) {
                 if (data.Result) {
-                    location.href = "/";
+                    location.href = "/admin/index";
                 }
                 else {
                     //jeBox.msg('用户名或密码错误', {
