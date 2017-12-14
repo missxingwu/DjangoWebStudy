@@ -86,6 +86,7 @@
        Sys_User.objects.get_or_create(Account="admin", Email="admin@163.com")
 
 	3.0 更新某个内容
+
 	   3.1 批量更新，适用于 .all()  .filter()  .exclude() 等后面 (危险操作，正式场合操作务必谨慎)
 	      Sys_User.objects.filter(Account__contains="abc").update(Account='xxx') # 名称中包含 "abc"的人 都改成 xxx
           Sys_User.objects.all().delete() # 删除所有 Sys_User 记录
@@ -106,12 +107,9 @@
 
 	5.0 注意事项：
 
-      (1). 如果只是检查 Entry 中是否有对象，应该用 Entry.objects.all().exists()
-      
-      (2). QuerySet 支持切片 Entry.objects.all()[:10] 取出10条，可以节省内存
-      
-      (3). 用 len(es) 可以得到Entry的数量，但是推荐用 Entry.objects.count()来查询数量，后者用的是SQL：SELECT COUNT(*)
-      
+      (1). 如果只是检查 Entry 中是否有对象，应该用 Entry.objects.all().exists()      
+      (2). QuerySet 支持切片 Entry.objects.all()[:10] 取出10条，可以节省内存      
+      (3). 用 len(es) 可以得到Entry的数量，但是推荐用 Entry.objects.count()来查询数量，后者用的是SQL：SELECT COUNT(*)      
       (4). list(es) 可以强行将 QuerySet 变成 列表
 
 	6.0 排序  Sys_User.objects.all().order_by('Account') # 在 column Account 前加一个负号，可以实现倒序 Sys_User.objects.all().order_by('-Account')
