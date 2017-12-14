@@ -13,6 +13,7 @@
              #'PORT':'3306',默认端口
          }
      }
+
 3.0  创建数据 （用命令启动必须要转到项目目录）
 
      1.0 创建数据 python manage.py makemigrations（检测模型） （不适应Mysql新建数据，用sqllite是可以创建数据库）
@@ -44,8 +45,7 @@
 	3.0 Session 配置
 	     先开启设置，默认是FALSE
          SESSION_SAVE_EVERY_REQUEST=True
-         SESSION_EXPIRE_AT_BROWSER_CLOSE=True 关闭浏览器失效 or  SESSION_COOKIE_AGE=60*30  有效时间 30分钟
-         
+         SESSION_EXPIRE_AT_BROWSER_CLOSE=True 关闭浏览器失效 or  SESSION_COOKIE_AGE=60*30  有效时间 30分钟         
 
 7.0 Django 数据库
    
