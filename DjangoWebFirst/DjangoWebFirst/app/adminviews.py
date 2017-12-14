@@ -64,15 +64,17 @@ def home(request):
 
     account = ""
     for obj in serializers.deserialize("json", user):
-        account = obj.object.Account
+        if obj.object.KeyId==1:
+            account = obj.object.Account
+        
 
     sysUser = models.Sys_User.objects.get(Account=account,IsDeleted=False)
     if sysUser is None:
         return HttpResponseRedirect('/adminlogin')
     
     allMenus = models.Sys_Menu.objects.with_counts()
-    topMenus=filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==True,allMenus)
-    leftMenus=filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==False,allMenus)
+    topMenus=list(filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==True,allMenus))
+    leftMenus=list(filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==False,allMenus))
     if sysUser.HeadImg is None or sysUser.HeadImg=="":
         sysUser.HeadImg="/Content/jeui/images/photo2.jpg"
     
