@@ -153,3 +153,11 @@
 10.0 序列化
 
     1.0 返回JSon数据 用 JsonResponse，serializers.serialize("json", models.Sys_User.objects.filter(Account=Account))序列化Django查询处理的数据，会带有 对象名称
+    2.0 import json 进行Json 序列化，序列化时间格式会出现问题，解决办法：
+        class DateEncoder(json.JSONEncoder):  
+            def default(self, obj):  
+                if isinstance(obj, pydatetime): 
+                    return obj.strftime("%Y-%m-%d %H:%M:%S")  
+                else:  
+                    return json.JSONEncoder.default(self, obj) 
+        json.dumps({'date': times,'name':name}, cls = DateEncoder,ensure_ascii=False) ，序列化后字符串会自动被转换为unicode字符串，要想得到字符串的真实表示，需要用到参数ensure_ascii=False(默认为True)。	
