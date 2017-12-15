@@ -154,6 +154,7 @@
 
     1.0 返回JSon数据 用 JsonResponse，serializers.serialize("json", models.Sys_User.objects.filter(Account=Account))序列化Django查询处理的数据，会带有 对象名称
     2.0 import json 进行Json 序列化，序列化时间格式会出现问题，解决办法：
+    
         class DateEncoder(json.JSONEncoder):  
             def default(self, obj):  
                 if isinstance(obj, pydatetime): 
