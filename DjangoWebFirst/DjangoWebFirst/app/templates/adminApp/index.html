@@ -49,7 +49,7 @@
                     <ul class="levelnext">
                       {% for nav in leftMenus %}
                         {% if nav.ParentId == item.KeyId %}
-                           <li><a href="javascript:;" data-tab="{{nav.KeyId}}" data-text="{{nav.FullName}}" data-url="{{nav.NavigateUrl}}" addtab>{{nav.FullName}}</a></li>
+                           <li><a href="javascript:;" data-tab="{{nav.KeyId}}{{nav.FullName}}" data-text="{{nav.FullName}}" data-url="{{nav.NavigateUrl|lower }}" addtab>{{nav.FullName}}</a></li>
                         {% endif%}
                       {% endfor%}
                     </ul>
@@ -90,7 +90,7 @@
                 firstItem: {                              //默认首页
                     tab: "main",
                     text: "后台首页",
-                    url: "/Admin/Main/Main",
+                    url: "/admin/main",
                     closable: false
                 }
             });

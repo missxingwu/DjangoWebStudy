@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core import serializers
 from app import models
 from django.conf import settings
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # 登录页面
@@ -64,7 +64,7 @@ def home(request):
 
     account = ""
     for obj in serializers.deserialize("json", user):
-        if obj.object.KeyId==1:
+        if obj.object.KeyId == 1:
             account = obj.object.Account
         
 
@@ -73,10 +73,10 @@ def home(request):
         return HttpResponseRedirect('/adminlogin')
     
     allMenus = models.Sys_Menu.objects.with_counts()
-    topMenus=list(filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==True,allMenus))
-    leftMenus=list(filter(lambda x: x.AccountId==sysUser.KeyId and x.IsDeleted==False and x.IsRoot==False,allMenus))
-    if sysUser.HeadImg is None or sysUser.HeadImg=="":
-        sysUser.HeadImg="/Content/jeui/images/photo2.jpg"
+    topMenus = list(filter(lambda x: x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == True,allMenus))
+    leftMenus = list(filter(lambda x: x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == False,allMenus))
+    if sysUser.HeadImg is None or sysUser.HeadImg == "":
+        sysUser.HeadImg = "/Content/jeui/images/photo2.jpg"
     
     #menus = filter(lambda x: x.AccountId==sysUser.KeyId,
     #models.Sys_Menu.objects.with_counts())
@@ -90,3 +90,25 @@ def home(request):
             'LoginName':sysUser.FullName,
             'LoginImg':sysUser.HeadImg,
         })
+
+def main(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+    return render(request,
+        'adminApp/main.html',
+        {
+            'title':'Home Page',
+            'year':datetime.now().year,
+        })
+
+
+def role(request):
+    """Renders the home page."""
+    assert isinstance(request, HttpRequest)
+    return render(request,
+        'adminApp/Role.html',
+        {
+            'title':'Home Page',
+            'year':datetime.now().year,
+        })
+

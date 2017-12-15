@@ -127,6 +127,9 @@ class Sys_Role(models.Model):
         verbose_name_plural = "角色列表"
 
 
+
+
+
 #角色对应菜单表
 class Sys_RoleMenu(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")

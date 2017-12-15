@@ -524,7 +524,8 @@
          * 获得Item对象
          * @param {number} index
          */
-        getItemObj:function(index) {
+        getItemObj: function (index) {
+            debugger
             return this.tabItem[this.tabsArr[index].tab];
         },
         /**

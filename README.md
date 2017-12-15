@@ -149,3 +149,7 @@
 9.0 Django Manager 管理器
   
     1.0 添加额外的管理器方法 列：  Sys_Menu 模型里
+
+10.0 序列化
+
+    1.0 返回JSon数据 用 JsonResponse，serializers.serialize("json", models.Sys_User.objects.filter(Account=Account))序列化Django查询处理的数据，会带有 对象名称

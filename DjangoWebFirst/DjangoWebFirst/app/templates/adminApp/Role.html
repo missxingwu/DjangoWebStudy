@@ -1,0 +1,163 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>角色管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="wcodeth=device-wcodeth, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.csss' %}" rel="stylesheet" />
+</head>
+<body>
+    
+    <div class="je-p20">
+        <blockquote class="je-quote green je-f16 je-ovh  je-mb10">
+            <p class="je-pb5">
+                <input type="text" id="txtKey" autocomplete="off" placeholder="请输入角色名称" class="je-input je-pl5 je-pr5">
+                <button class="je-btn je-f14" onclick="Search()"><i class="aweicon aweicon-search"></i>查询</button>
+                <button class="je-btn je-f14 je-bg-green" onclick="Add()"><i class="aweicon aweicon-plus">&nbsp;</i>新增</button>
+            </p>
+        </blockquote>
+        <div id="testtwo" class="je-f14"></div>
+    </div>
+
+    <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+        jeui.use(["jquery", "jeBox", "jeTable", "jeCheck"], function () {
+            Search();
+        });
+
+        function formatdate(str, attr) {
+            if (str == null) {
+                return "null";
+            }
+            str = str.replace(/\D/igm, "");
+            if (isNaN(str)) {
+                return str;
+            } else {
+                var fmt = attr || "YYYY-MM-DD", dateNum = parseInt((str.toString()).substring(0, 10)),
+                    times = new Date(dateNum * 1000);
+                var o = {
+                    "M+": times.getMonth() + 1, // 月
+                    "D+": times.getDate(), // 日
+                    "h+": times.getHours(), // 时
+                    "m+": times.getMinutes(), // 分
+                    "s+": times.getSeconds(), // 秒
+                    "q+": Math.floor((times.getMonth() + 3) / 3), // 季度
+                    "ms": times.getMilliseconds() // 毫秒
+                };
+                if (/(Y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (times.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o) {
+                    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                }
+                return fmt;
+            }
+        }
+        function Add() {
+            jeBox.open({
+                title:'新增',
+                type: 'iframe',
+                boxSize: ['700px', '400px'],
+                scrollbar: false,
+                content: '/Admin/Role/Create'
+            });
+        }
+        function Edit(keyid) {
+            jeBox.open({
+                title: '编辑',
+                type: 'iframe',
+                boxSize: ['700px', '400px'],
+                scrollbar: false,
+                content: '/Admin/Role/Create?KeyId=' + keyid
+            });
+        }
+        function Permissions(keyid) {
+            jeBox.open({
+                title: '分配权限',
+                type: 'iframe',
+                boxSize: ['1100px', '600px'],
+                scrollbar: false,
+                content: '/Admin/Role/Permissions?KeyId=' + keyid
+            });
+        }
+        function Delete(keyid) {
+            jeBox.open({
+                cell: "jbx",
+                title: "提示",
+                content: '您确定要删除当前数据？',
+                maskLock: true,
+                btnAlign: "center",
+                button: [
+                    {
+                        name: '确定',
+                        callback: function (index) {
+                            $.getJSON("/Admin/Role/Delete", { KeyId: keyid }, function (result) {
+                                if (result.Result) {
+                                    Search();
+                                    jeBox.close(index);
+                                }
+                            });
+                        }
+                    },
+
+                    {
+                        name: '取消'
+                    }
+                ]
+            })
+        }
+        function Search() {
+            $("#testtwo").jeTable({
+                datas: {
+                    url: "/admin/list_role",
+                    type: "get",
+                    data: {
+                        FullName: $("#txtKey").val()
+                    },
+                    async: false,
+                    dataType: "json",
+                    field: "rows"
+                },
+                pageField: {
+                    pageIndex: { field: "PageIndex", num: 1 },
+                    pageSize: { field: "PageSize", num: 10 },
+                    ellipsis: true,
+                    dataCount: "totalCount",
+                    pageCount: "totalPage"
+                },
+                columnSort: [1, 2],//哪些列加排序，顺序号：索引+1
+                columns: [
+                    //{ name: 'ID', field: 'KeyId', width: "80", align: 'center', isShow: false, renderer: "" },
+                    { name: '名称', field: 'FullName', width: "250", align: 'left' },
+                    { name: '描述', field: 'Description', width: "600", align: 'left', renderer: "" },
+                    {
+                        name: '创建时间', field: 'CreateDate', width: "200", align: 'left', renderer: function (obj, rowidx) {
+                            return formatdate(obj.CreateDate, "YYYY-MM-DD hh:mm:ss");
+                        }
+                    },
+                    {
+                        name: '操作', field: 'KeyId', width: "200", align: 'center', renderer: function (obj, rowidx) {
+                            var str = '<button class="je-btn je-btn-mini je-f12" onclick="Edit(\'' + obj.KeyId + '\')">编辑</button>&nbsp;&nbsp;';
+                            str += '<button class="je-btn je-btn-mini je-bg-red je-f12" onclick="Delete(\'' + obj.KeyId + '\')">删除</button>&nbsp;&nbsp;';
+                            str += '<button class="je-btn je-btn-mini je-bg-green je-f12" onclick="Permissions(\'' + obj.KeyId + '\')">分配权限</button>';
+                            return str;
+                        }
+                    }
+                ],
+                itemfun: function (elem, data) {
+                    elem.on("dblclick", function () {
+                        //var trdata = $.parseJSON($(this).attr("trdata"));
+                    })
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
