@@ -78,9 +78,10 @@ def role_list(request):
     str.FullName = "12321"
     str.KeyId = 1
     str.DateTime = datetime.now()
-    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime)  把时间序列化为Json 格式
+    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime)  把时间序列化为Json 格式 
     strjson = json.dumps(str,cls = DateEncoder)  
-    strjsonTime = json.dumps({'date': datetime.datetime.now()}, cls = DateEncoder)  
+    # json 序列化后 会自动转为unicode字符串，要想得到字符串的真实表示，需要用到参数ensure_ascii=False(默认为True)
+    strjsonTime = json.dumps({'date': datetime.datetime.now()}, cls = DateEncoder,ensure_ascii=False)  
     #strjson = json.dumps(model_to_dict(str))
 
 
