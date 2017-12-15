@@ -28,10 +28,8 @@ def datetime_handler(obj):
 
 class DateEncoder(json.JSONEncoder):  
     def default(self, obj):  
-        if isinstance(obj, datetime.datetime):  
-            return obj.strftime('%Y-%m-%d %H:%M:%S')  
-        elif isinstance(obj, date):  
-            return obj.strftime("%Y-%m-%d")  
+        if isinstance(obj, datetime):  
+            return obj.strftime('%Y-%m-%d %H:%M:%S') 
         else:  
             return json.JSONEncoder.default(self, obj) 
 
@@ -80,8 +78,8 @@ def role_list(request):
     str.FullName = "12321"
     str.KeyId = 1
     str.DateTime = datetime.now()
-    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime)
-    strjson = json.dumps(str,cls = DatetimeEncoder)  
+    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime)  把时间序列化为Json 格式
+    strjson = json.dumps(str,cls = DateEncoder)  
     strjsonTime = json.dumps({'date': datetime.datetime.now()}, cls = DateEncoder)  
     #strjson = json.dumps(model_to_dict(str))
 
