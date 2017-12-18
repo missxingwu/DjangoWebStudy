@@ -162,3 +162,11 @@
                 else:  
                     return json.JSONEncoder.default(self, obj) 
         json.dumps({'date': times,'name':name}, cls = DateEncoder,ensure_ascii=False) ，序列化后字符串会自动被转换为unicode字符串，要想得到字符串的真实表示，需要用到参数ensure_ascii=False(默认为True)。	
+
+ 11.0 引入自定义模块
+   
+    1.0 当要引入的模块和被引入的模块在同一个路径时  可以直接 import
+	2.0 当他们不在同目录下是 参考role_list.py 引入 jsonhelp 用：
+	        import sys 
+			sys.path.append('app/ListTimeToJSon')
+			import JsonHelp
