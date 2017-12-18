@@ -23,9 +23,6 @@ class DateEncoder(json.JSONEncoder):
 
 
 
-
-
-
 def role_list(request):
     columns = models.Sys_Role.objects.filter(IsDeleted=True)
     articles = models.Sys_Role.objects.filter(IsDeleted=True)
@@ -71,11 +68,8 @@ def role_list(request):
 
     strjsonDatalist = serializers.serialize("json",customer, cls = DateEncoder,ensure_ascii=False)  
     # json 序列化后 会自动转为unicode字符串，要想得到字符串的真实表示，需要用到参数ensure_ascii=False(默认为True)
-    strjsonTime = json.dumps({'date': datetime.datetime.now()}, cls = DateEncoder,ensure_ascii=False)  
+    strjsonTime = json.dumps({'date': datetime.now()}, cls = DateEncoder,ensure_ascii=False)  
     #strjson = json.dumps(model_to_dict(str))
 
-    for row in customer.object_list:
-        #aa = serializers.serialize("json",row)
-        rowslist = json.dumps(model_to_dict(row)) 
     #-------------------------------------------------------------------------------------------------------------------
     return JsonResponse(name_dict)
