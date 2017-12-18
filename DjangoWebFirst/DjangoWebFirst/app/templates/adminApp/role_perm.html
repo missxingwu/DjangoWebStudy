@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     {% load staticfiles %}    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <input type="hidden" id="RoleId" value="{{KeyId}}" />
+    <div class="je-p20" id="divper">
+        <div style="margin-bottom:20px;">
+            <input id="chkAll" type="checkbox" name="checkbox" jename="checkbox" jetext="全选/取消">
+        </div>
+        <table class="je-table je-mb20" skin="leftline" even>
+            <thead>
+                <tr>
+                    <th width="120">顶部菜单</th>
+                    <th width="120">一级菜单</th>
+                    <th width="120">二级菜单</th>
+                    <th>操作按钮</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in rootMenuList %}
+
+                  
+                    <tr menu="根菜单">
+                        <td><input ismenu="true" chkid="{{item.KeyId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{item.FullName}}"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                   {% for x in menuList %}
+                     {% if x.ParentId == item.KeyId %}
+                   
+                    
+                        <tr menu="一级菜单">
+                            <td></td>
+                            <td><input ismenu="true" chkid="{{x.KeyId}}" pid="{{x.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{x.FullName}}"></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                      {% for y in menuList %}
+                        {% if y.ParentId == x.KeyId %}
+
+                         {% for z in menuButtonList %}
+                            {% if z.MenuId == y.KeyId %}
+                           <tr menu="二级菜单">
+                                <td></td>
+                                <td></td>
+                                <td><input ismenu="true" chkid="{{y.KeyId}}" pid="{{y.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{y.FullName}}"></td>
+                                <td menu="操作按钮">
+                                     {% for b in buttonList %}
+                                       {% if z.MenuId == y.KeyId and b.KeyId == z.ButtonId %}                                   
+                                            <input ismenu="false" chkid="{{z.ButtonId}}" pid="{{z.MenuId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{b.FullName}}">
+                                        {% endif %}
+                                    {% endfor%}
+
+                                </td>
+                            </tr>
+                         {% endif %}
+                       {% endfor%}
+
+                     {% endif %}
+                   {% endfor%}
+                 {% endif %}
+                {% endfor%}
+              {% endfor%}
+            </tbody>
+        </table>
+
+        <button class="je-btn je-f14" onclick="Save(this)"><i class="aweicon aweicon-save">&nbsp;</i>保 存</button>
+
+    </div>
+
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+        var index = parent.jeBox.frameIndex(window.name);
+        jeui.use(["jquery", "jeBox", "jeCheck"], function () {
+            //$("#tableper").jeCheck();
+            $("#divper").jeCheck({ jename: "checkbox" });
+            //全选、取消
+            $("#chkAll").click(function () {
+                var checked = $(this).prop("checked");
+                $("input[type=checkbox]").each(function () {
+                    $("input[type=checkbox]").prop("checked", checked);
+                    if (checked) {
+                        $(this).parent().addClass("on");
+                    }
+                    else {
+                        $(this).parent().removeClass("on");
+                    }
+                });
+            });
+
+            $("input[type=checkbox]").click(function () {
+                ChoiceParent($(this));
+                CancelChild($(this));
+            });
+            //绑定角色权限
+            $.getJSON("/Admin/Role/GetPermissions", { RoleId: $("#RoleId").val() }, function (data) {
+                if (data != null) {
+                    //菜单
+                    for (var i = 0; i < data.RoleMenuList.length; i++) {
+                        $("input[chkid=" + data.RoleMenuList[i].MenuId + "][ismenu=true]").prop("checked", true);
+                        $("input[chkid=" + data.RoleMenuList[i].MenuId + "][ismenu=true]").parent().addClass("on");
+                    }
+                    //按钮
+                    for (var i = 0; i < data.RoleMenuButtonList.length; i++) {
+                        $("input[chkid=" + data.RoleMenuButtonList[i].ButtonId + "][pid=" + data.RoleMenuButtonList[i].MenuId + "]").prop("checked", true);
+                        $("input[chkid=" + data.RoleMenuButtonList[i].ButtonId + "][pid=" + data.RoleMenuButtonList[i].MenuId + "]").parent().addClass("on");
+                    }
+                }
+            });
+        })
+
+        //递归选择父级
+        function ChoiceParent(obj) {
+            if (obj.prop("checked")) {
+                var id = obj.attr("pid");
+                if (id != undefined) {
+                    $("input[chkid=" + id + "]").prop("checked", true);
+                    $("input[chkid=" + id + "]").parent().addClass("on");
+                    ChoiceParent($("input[chkid=" + id + "]"));
+                }
+
+            }
+        }
+        //递归取消子级
+        function CancelChild(obj) {
+            if (!obj.prop("checked")) {
+                var id = obj.attr("chkid");
+                if (id != undefined) {
+                    $("input[pid='" + id + "']").prop("checked", false);
+                    $("input[pid='" + id + "']").parent().removeClass("on");
+                    CancelChild($("input[pid='" + id + "']"));
+                }
+
+            }
+        }
+
+        function Save(obj) {
+            var menuids = '';
+            var buttonids = '';
+            $("input[type=checkbox]:checked").not("#chkAll").each(function () {
+                if ($(this).attr("ismenu") == "true") {
+                    menuids += $(this).attr("chkid") + ",";
+                }
+                else {
+                    buttonids += $(this).attr("chkid") + "|" + $(this).attr("pid") + ",";
+                }
+            });
+
+            $(obj).prop("disabled", true);
+            $.ajax({
+                url: "/Admin/Role/Save",
+                type: "post",
+                data: {
+                    MenuIds: menuids,
+                    ButtonIds: buttonids,
+                    RoleId: $("#RoleId").val()
+                },
+                success: function (result) {
+                    if (result.Result) {
+                        jeBox.msg("保存成功", { icon: 2, time: 2 });
+                        setTimeout(function () { parent.jeBox.close(index) }, 2000);
+                        return;
+                    }
+                    jeBox.msg("保存失败");
+                },
+                async: false
+            });
+            $(obj).prop("disabled", false);
+        }
+    </script>
+</body>
+</html>

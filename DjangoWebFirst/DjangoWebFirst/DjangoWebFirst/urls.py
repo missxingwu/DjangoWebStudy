@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^admin/role', app.adminviews.role, name='role'),    
     url(r'^admin/add_role$',app.role_list.add_role, name='add_role'),
     url(r'^admin/list_role$', app.role_list.role_list, name='list_role'),
+    url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
+    url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
     url(r'^adminlogin', app.adminviews.adminlogin, name='adminlogin'),
     url(r'^UpgradeBrowser', app.adminviews.UpgradeBrowser, name='UpgradeBrowser'),
     url(r'^login/$',

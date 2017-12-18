@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
+from django.http import HttpResponseRedirect 
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password, check_password #加密解密
 from django.core import serializers
@@ -18,8 +19,8 @@ import JsonHelp
 
 def role_list(request):
     fullname = request.GET.get('FullName')    
-    columns = models.Sys_Role.objects.filter(IsDeleted=False)
-    if fullname != None: 
+    columns = models.Sys_Role.objects.all() #models.Sys_Role.objects.filter(IsDeleted=False)
+    if fullname != None and fullname != "": 
       columns = models.Sys_Role.objects.filter(IsDeleted=False,FullName__contains=fullname)
 
     total = int(request.GET.get('PageSize')) # 每页最多显示数据量
@@ -70,10 +71,13 @@ def role_list(request):
     #-------------------------------------------------------------------------------------------------------------------
     return JsonResponse(name_dict)
 
-def add_role(request):
-    """Renders the role_add page."""
+
+def add_role(request,):
+    """角色新增和修改"""
     #assert isinstance(request, HttpRequest)
     use2r = request.session.get(settings.ADMIN_SESSION,default=None)
+    if use2r is None:
+        return HttpResponseRedirect('/adminlogin')
     keyId = 0
     try:
          keyId = int(request.GET.get('KeyId'))
@@ -113,3 +117,44 @@ def add_role(request):
        # 返回Json 数据
        name_dict = {'Result': Result, 'Msg': Msg}
        return JsonResponse(name_dict)
+
+def del_role(request,KeyId):
+     """删除角色"""
+     use2r = request.session.get(settings.ADMIN_SESSION,default=None)
+     if use2r is None:
+        return HttpResponseRedirect('/adminlogin')
+     Result = False    
+     Msg = ""
+     try:
+            roleModel = models.Sys_Role.objects.filter(KeyId=KeyId).delete()
+            Result = True
+     except Exception as err:
+           Msg = err.args     
+
+     name_dict = {'Result': Result, 'Msg': Msg}
+     return JsonResponse(name_dict)
+
+
+def perm_role(request,keyId):
+     """分配权限"""
+     use2r = request.session.get(settings.ADMIN_SESSION,default=None)
+     if use2r is None:
+        return HttpResponseRedirect('/adminlogin')
+     
+      # var list = bll.GetList<Sys_Menu>(item => item.IsDeleted ==
+      # false).ToList();
+      #   var list2 = bll.GetList<Sys_MenuButton>(item => item.KeyId !=
+      #   null).ToList();
+      #    var list3 = bll.GetList<Sys_Button>(item => item.IsDeleted ==
+      #    false).ToList();
+
+
+     try:
+          menuList = models.Sys_Menu.objects.filter(IsDeleted=False,IsRoot = False)
+          rootMenuList = models.Sys_Menu.objects.filter(IsDeleted=False,IsRoot = True)
+          menuButtonList = models.Sys_MenuButton.objects.all()
+          buttonList = models.Sys_Button.objects.filter(IsDeleted=False)
+          return render(request,'adminApp/role_perm.html',{'title':'分配权限','KeyId':keyId,'menuList':menuList,'menuButtonList':menuButtonList,'buttonList':buttonList,'rootMenuList':rootMenuList})  
+     except Exception as err:
+         return render(request,'adminApp/role_perm.html',{'title':'分配权限','KeyId':keyId})  
+    

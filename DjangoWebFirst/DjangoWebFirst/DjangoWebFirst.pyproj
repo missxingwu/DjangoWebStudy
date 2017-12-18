@@ -331,6 +331,7 @@
     <Content Include="app\templates\adminApp\Role.html" />
     <Content Include="app\templates\adminApp\main.html" />
     <Content Include="app\templates\adminApp\role_add.html" />
+    <Content Include="app\templates\adminApp\role_perm.html" />
     <Content Include="app\templates\adminApp\UpgradeBrowser.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
