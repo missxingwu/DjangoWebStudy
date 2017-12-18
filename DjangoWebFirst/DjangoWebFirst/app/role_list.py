@@ -14,18 +14,6 @@ from django.forms.models import model_to_dict
 import time
 
 
-class DatetimeEncoder(json.JSONEncoder):
-    def default(self, obj):
-        try:
-            return super(DatetimeEncoder, obj).default(obj)
-        except TypeError:
-            return str(obj)
-
-def datetime_handler(obj):
-   if isinstance(obj, (datetime.datetime, datetime.date)):
-        return obj.isoformat()
-   raise TypeError("Type %s not serializable" % type(obj))
-
 class DateEncoder(json.JSONEncoder):  
     def default(self, obj):  
         if isinstance(obj, datetime):  
@@ -44,7 +32,10 @@ def role_list(request):
 
     total = 2                           # 每页最多显示数据量
     totalCount = len(columns)           # 总数据量
-    totalPage = 3 #totalCount / total # 总页数
+    totalPage = int(totalCount / total)# 总页数
+    if totalCount % total > 0:
+        totalPage+=1
+    
 
     cus_list = models.Sys_Role.objects.filter(IsDeleted=True)
 
@@ -74,19 +65,17 @@ def role_list(request):
     
   
     name_dict = {"rows": result_list, "total": total,"totalCount":totalCount,"totalPage":totalPage}
-    str = models.Sys_Role()
-    str.FullName = "12321"
-    str.KeyId = 1
-    str.DateTime = datetime.now()
-    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime)  把时间序列化为Json 格式 
-    strjson = json.dumps(str,cls = DateEncoder)  
+
+    #---------------------------------------------------Json 序列化学习
+    #varda =time.strftime('%Y-%m-%d %H:%M:%S',str.DateTime) 把时间序列化为Json 格式
+
+    strjsonDatalist = serializers.serialize("json",customer, cls = DateEncoder,ensure_ascii=False)  
     # json 序列化后 会自动转为unicode字符串，要想得到字符串的真实表示，需要用到参数ensure_ascii=False(默认为True)
     strjsonTime = json.dumps({'date': datetime.datetime.now()}, cls = DateEncoder,ensure_ascii=False)  
     #strjson = json.dumps(model_to_dict(str))
 
-
     for row in customer.object_list:
         #aa = serializers.serialize("json",row)
         rowslist = json.dumps(model_to_dict(row)) 
-
+    #-------------------------------------------------------------------------------------------------------------------
     return JsonResponse(name_dict)
