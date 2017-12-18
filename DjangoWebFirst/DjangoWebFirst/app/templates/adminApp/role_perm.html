@@ -48,25 +48,23 @@
                             <td></td>
                         </tr>
                       {% for y in menuList %}
-                        {% if y.ParentId == x.KeyId %}
+                        {% if y.ParentId == x.KeyId  %}
 
-                         {% for z in menuButtonList %}
-                            {% if z.MenuId == y.KeyId %}
-                           <tr menu="二级菜单">
-                                <td></td>
-                                <td></td>
-                                <td><input ismenu="true" chkid="{{y.KeyId}}" pid="{{y.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{y.FullName}}"></td>
-                                <td menu="操作按钮">
-                                     {% for b in buttonList %}
-                                       {% if z.MenuId == y.KeyId and b.KeyId == z.ButtonId %}                                   
-                                            <input ismenu="false" chkid="{{z.ButtonId}}" pid="{{z.MenuId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{b.FullName}}">
-                                        {% endif %}
-                                    {% endfor%}
-
-                                </td>
-                            </tr>
-                         {% endif %}
-                       {% endfor%}
+                               <tr menu="二级菜单">
+                                    <td></td>
+                                    <td></td>
+                                    <td><input ismenu="true" chkid="{{y.KeyId}}" pid="{{y.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{y.FullName}}"></td>
+                                    <td menu="操作按钮">
+                                    {% for z in menuButtonList %}
+                                         {% for b in buttonList %}
+                                           {% if z.MenuId == y.KeyId and b.KeyId == z.ButtonId %}                                   
+                                                <input ismenu="false" chkid="{{z.ButtonId}}" pid="{{z.MenuId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{b.FullName}}">
+                                            {% endif %}
+                                        {% endfor%}
+                                  {% endfor%}
+                                    </td>
+                                </tr>
+                        
 
                      {% endif %}
                    {% endfor%}
