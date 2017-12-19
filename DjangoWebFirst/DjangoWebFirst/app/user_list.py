@@ -149,13 +149,21 @@ def rolepost(request):
         Msg = ""
         try: 
             lastpos = len(listRoleId) - 1
+            count = 0
+            while (count < len(listRoleId) - 1):
+                     models.Sys_UserRole.objects.filter(UserId =keyId).delete()
+                     userrole = models.Sys_UserRole(UserId=keyId,RoleId=listRoleId[count],DateTime=datetime.now())
+                     userrole.save()
+                     count = count + 1
+            Result = True
+            """
             for i, x in listRoleId:
                if lastpos != i:
                      models.Sys_UserRole.objects.filter(UserId =keyId).delete()
                      userrole = models.Sys_UserRole(UserId=keyId,RoleId=x,DateTime=datetime.now())
                      userrole.save()
                      Result = True
-               
+             """  
         except Exception as err:
              Result = False
              Msg = err.args
