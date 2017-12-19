@@ -29,7 +29,7 @@ def adminlogin(request):
        PassWord = form["PassWord"]
        # 加密
        pwd = make_password(PassWord)
-       # 对比明文和密码是否相同
+       # 对比明文和密码是否相同  
        ck = check_password("12", pwd)
 
        # 验证是否存在用户此 Django自带

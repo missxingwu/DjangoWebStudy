@@ -187,7 +187,7 @@
                 field_classes=None               # 自定义字段类 （也可以自定义字段）
                 localized_fields=('birth_date',) # 本地化，如：根据不同时区显示数据
                 如：
-                    数据库中
+                    数据库中     
                         2016-12-27 04:10:57
                     setting中的配置
                         TIME_ZONE = 'Asia/Shanghai'
