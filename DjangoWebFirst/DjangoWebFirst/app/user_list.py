@@ -126,3 +126,48 @@ def del_user(request,keyId):
 
      name_dict = {'Result': Result, 'Msg': Msg}
      return JsonResponse(name_dict)
+
+def role(request,keyId):
+    """分配角色 """
+    if request.method == "GET":
+        roleModel = models.Sys_Role.objects.filter(IsDeleted=False)
+        return render(request,
+                     'adminApp/user_role.html',{
+                         'model':roleModel,
+                         'title':'分配角色',
+                         'userId':keyId})
+
+def rolepost(request):
+    """分配角色 """
+    if request.method == "POST":
+        form = request.POST
+        keyId = form["UserId"]
+        RoleIds = form["RoleIds"]
+        #RoleIds = RoleIds.rstrip().replace()
+        listRoleId = RoleIds.split(",")
+        Result = False
+        Msg = ""
+        try: 
+            lastpos = len(listRoleId) - 1
+            for i, x in listRoleId:
+               if lastpos != i:
+                     models.Sys_UserRole.objects.filter(UserId =keyId).delete()
+                     userrole = models.Sys_UserRole(UserId=keyId,RoleId=x,DateTime=datetime.now())
+                     userrole.save()
+                     Result = True
+               
+        except Exception as err:
+             Result = False
+             Msg = err.args
+
+        name_dict = {'Result': Result, 'Msg': Msg}
+        return JsonResponse(name_dict)
+    elif request.method == "GET":
+        keyId = request.GET.get('UserId')
+        userrolelist = models.Sys_UserRole.objects.filter(UserId =keyId)    
+        if len(userrolelist) < 1:
+             return JsonResponse("",safe=False)
+        jsondata = serializers.serialize("json",userrolelist,ensure_ascii = False)
+        return JsonResponse(jsondata,safe=False)
+
+    

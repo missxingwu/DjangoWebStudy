@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>{{title}}</title>
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <input id="UserId" type="hidden" value="{{userId}}" />
+    <div style="height:250px;overflow-y:auto;">
+        <form id="form1">{% csrf_token %}</form>
+        
+        {% for item in model %}        
+            <input id="{{item.KeyId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{item.FullName}}">
+        {% endfor %}
+    </div>
+    <div style="padding-top:30px;">
+        <button class="je-btn" id="btnOk">提 交</button>
+        <button class="je-btn je-bg-native" id="btnCancel">取 消</button>
+    </div>
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+    var index = parent.jeBox.frameIndex(window.name);
+    jeui.use(["jquery", "jeBox", "jeCheck"], function () {
+        $("div").jeCheck({ jename: "checkbox" });
+        //绑定用户角色
+        $.getJSON("/admin/permroledata", { UserId: $("#UserId").val() }, function (data) {
+            if (data.length > 0) {
+               debugger
+               var data_json = JSON.parse(data)
+                for (var i = 0; i < data_json.length; i++) {
+                    $("#" + data_json[i].fields.RoleId).prop("checked", true);
+                    $("#" + data_json[i].fields.RoleId).parent().addClass("on");
+                }
+            }
+        });
+        $("#btnOk").click(function () {
+            var str = '';
+            $("input[type=checkbox]:checked").each(function () {
+                str += $(this).attr("id") + ",";
+            });
+            if (str.length == 0) {
+                jeBox.msg("请至少选一个角色才能保存", { icon: 1, time: 2 });
+                return;
+            }
+            $.post("/admin/permroledata", { UserId: $("#UserId").val(), RoleIds: str,csrfmiddlewaretoken: '{{ csrf_token }}' }, function (result) {
+                if (result.Result) {
+                    jeBox.msg("保存成功", { icon: 2, time: 2 });
+                    setTimeout(function () { parent.jeBox.close(index) }, 2000);
+                    return;
+                }
+                jeBox.msg("保存失败");
+            });
+        });
+        $("#btnCancel").click(function () {
+            parent.jeBox.close(index);
+        });
+    });
+
+
+    </script>
+</body>
+</html>
