@@ -103,10 +103,20 @@ def main(request):
 
 
 def role(request):
-    """Renders the home page."""
+    """角色页面"""
     assert isinstance(request, HttpRequest)
     return render(request,
         'adminApp/Role.html',
+        {
+            'title':'Home Page',
+            'year':datetime.now().year,
+        })
+
+def  user(request):
+    """用户页面"""
+    assert isinstance(request, HttpRequest)
+    return render(request,
+        'adminApp/user.html',
         {
             'title':'Home Page',
             'year':datetime.now().year,

@@ -5,6 +5,7 @@ Definition of models.
 from django.db import models
 import json
 import datetime
+from django.forms import ModelForm
   
 class UserMenuManager(models.Manager):
     def with_counts(self):
@@ -74,7 +75,7 @@ class Sys_ErrorLog(models.Model):
   
  #菜单表
 class Sys_Menu(models.Model):
-    KeyId =models.AutoField(primary_key=True,verbose_name="主键ID")
+    KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
     ParentId = models.IntegerField(verbose_name="父级")
     FullName = models.CharField(max_length=50,verbose_name="称呼")
     Icon = models.CharField(max_length=50,verbose_name="图标") 
@@ -133,8 +134,8 @@ class Sys_Role(models.Model):
 #角色对应菜单表
 class Sys_RoleMenu(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
-    RoleId  = models.IntegerField(verbose_name="角色ID")    
-    MenuId  = models.IntegerField(verbose_name="菜单ID")
+    RoleId = models.IntegerField(verbose_name="角色ID")    
+    MenuId = models.IntegerField(verbose_name="菜单ID")
     DateTime = models.DateTimeField(verbose_name="时间")
     class Meta:
         verbose_name = "角色对应菜单"
@@ -144,8 +145,8 @@ class Sys_RoleMenu(models.Model):
 #角色对应菜单表按钮
 class Sys_RoleMenuButton(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
-    RoleId  = models.IntegerField(verbose_name="角色ID")    
-    MenuId  = models.IntegerField(verbose_name="菜单ID")
+    RoleId = models.IntegerField(verbose_name="角色ID")    
+    MenuId = models.IntegerField(verbose_name="菜单ID")
     ButtonId = models.IntegerField(verbose_name="按钮ID")
     DateTime = models.DateTimeField(verbose_name="时间")
     class Meta:
@@ -155,24 +156,24 @@ class Sys_RoleMenuButton(models.Model):
 #用户表
 class Sys_User(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
-    Account  = models.CharField(max_length=50,verbose_name="账号")    
-    PassWord  = models.CharField(max_length=128,verbose_name="密码")   
+    Account = models.CharField(max_length=50,verbose_name="账号")    
+    PassWord = models.CharField(max_length=128,verbose_name="密码")   
     FullName = models.CharField(max_length=50,verbose_name="称呼")   
-    Job=models.CharField(max_length=50,verbose_name="职位")  
-    Educational=models.CharField(max_length=100,verbose_name="学历")  
-    FinishSchool=models.CharField(max_length=100,verbose_name="毕业学校")
-    OrgId=models.CharField(max_length=50,verbose_name="所属组织")
-    HeadImg=models.CharField(max_length=250,verbose_name="头像")
-    Phone=models.CharField(max_length=50,verbose_name="联系方式")
-    Email=models.CharField(max_length=50,verbose_name="邮件")
-    Sex=models.BooleanField(verbose_name="性别")
+    Job = models.CharField(max_length=50,verbose_name="职位")  
+    Educational = models.CharField(max_length=100,verbose_name="学历")  
+    FinishSchool = models.CharField(max_length=100,verbose_name="毕业学校")
+    OrgId = models.CharField(max_length=50,verbose_name="所属组织")
+    HeadImg = models.CharField(max_length=250,verbose_name="头像")
+    Phone = models.CharField(max_length=50,verbose_name="联系方式")
+    Email = models.CharField(max_length=50,verbose_name="邮件")
+    Sex = models.BooleanField(verbose_name="性别")
     BirthDay = models.DateTimeField(verbose_name="出生日期")  
-    IDCard=models.CharField(max_length=50,verbose_name="身份证")
-    Address=models.CharField(max_length=150,verbose_name="地址")
-    Description=models.TextField(verbose_name="简介")
+    IDCard = models.CharField(max_length=50,verbose_name="身份证")
+    Address = models.CharField(max_length=150,verbose_name="地址")
+    Description = models.TextField(verbose_name="简介")
     SortNum = models.IntegerField(verbose_name="排序")
-    IsDeleted = models.BooleanField(verbose_name="是否删除")
-    DateTime = models.DateTimeField(verbose_name="时间")  
+    IsDeleted = models.BooleanField(default=False, verbose_name="是否删除")
+    DateTime = models.DateTimeField(auto_now=True,verbose_name="时间")  
     class Meta:
         verbose_name = "用户"
         verbose_name_plural = "用户列表"
@@ -198,15 +199,29 @@ class Sys_User(models.Model):
     
         return json.dumps(d)
 
+    def toList(self):
+        return json.dumps(dict([(attr, getattr(self, attr)) for attr in [f.name for f in self._meta.fields]]))
+
 #用户对应角色表
 class Sys_UserRole(models.Model):
     KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
-    RoleId  = models.IntegerField(verbose_name="角色ID")    
-    UserId   = models.IntegerField(verbose_name="用户ID")
+    RoleId = models.IntegerField(verbose_name="角色ID")    
+    UserId = models.IntegerField(verbose_name="用户ID")
     DateTime = models.DateTimeField(verbose_name="时间")
     class Meta:
         verbose_name = "用户角色"
         verbose_name_plural = "用户角色列表"
 
-
+class Sys_User_Form(ModelForm):  
+    class Meta:  
+        model = Sys_User  
+        fields = "__all__"      #或('FullName','Email','Account') # #验证哪些字段，"__all__"表示所有字段
+        exclude = ['KeyId','Educational', 'FinishSchool', 'Job','PassWord']          #排除的字段
+    #可以抛出异常 def clean_<fieldname>: 
+    def clean_Account(self):
+        value = self.cleaned_data['Account']
+        if value != 'admin':
+            return value
+        else:
+            raise ValidationError("admin：已经存在")
 

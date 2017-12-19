@@ -10,6 +10,7 @@ import app.forms
 import app.views
 import app.adminviews
 import app.role_list
+import app.user_list
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -25,11 +26,19 @@ urlpatterns = [
     #url(r'^UpgradeBrowser', app.views.UpgradeBrowser, name='UpgradeBrowser'),
     url(r'^admin/index', app.adminviews.home, name='index'),
     url(r'^admin/main', app.adminviews.main, name='main'),
-    url(r'^admin/role', app.adminviews.role, name='role'),    
+    url(r'^admin/role', app.adminviews.role, name='role'),  
+    url(r'^admin/user', app.adminviews.user, name='user'), 
     url(r'^admin/add_role$',app.role_list.add_role, name='add_role'),
     url(r'^admin/list_role$', app.role_list.role_list, name='list_role'),
     url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
     url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
+
+    
+    url(r'^admin/list_user$',app.user_list.list, name='list_user'),
+    url(r'^admin/add_user$', app.user_list.edit, name='add_user'),
+    #url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
+    #url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
+
     url(r'^adminlogin', app.adminviews.adminlogin, name='adminlogin'),
     url(r'^UpgradeBrowser', app.adminviews.UpgradeBrowser, name='UpgradeBrowser'),
     url(r'^login/$',

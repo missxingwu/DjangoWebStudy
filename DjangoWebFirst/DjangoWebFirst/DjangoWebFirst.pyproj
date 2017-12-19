@@ -48,6 +48,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="app\tests.py" />
+    <Compile Include="app\user_list.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
@@ -333,6 +336,8 @@
     <Content Include="app\templates\adminApp\role_add.html" />
     <Content Include="app\templates\adminApp\role_perm.html" />
     <Content Include="app\templates\adminApp\UpgradeBrowser.html" />
+    <Content Include="app\templates\adminApp\user.html" />
+    <Content Include="app\templates\adminApp\user_add.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

@@ -1,0 +1,296 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/zTree/css/awesomeStyle/awesome.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="je-p20">
+        <form id="form1">
+            {% csrf_token %}
+            <div class="je-form-item">
+                <label class="je-label je-f14">姓名<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="text" name="FullName" autocomplete="off" placeholder="请输入姓名" class="je-input" checkexpession="NotNull" checkname="姓名" isvalidate="true" maxlength="20" value="{{Model.FullName}}">
+                    <input type="hidden" name="KeyId" value="{{Model.KeyId}}" />
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">账号<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="text" name="Account" autocomplete="off" placeholder="请输入账号" class="je-input" checkexpession="NotNull" checkname="账号" isvalidate="true" maxlength="20" value="{{Model.Account}}">
+                </div>
+            </div>
+            {% if Model.KeyId == 0 %}
+                 <div class="je-form-item">
+                    <label class="je-label je-f14">密码<font color="red">*</font></label>
+                    <div class="je-inputbox">
+                        <input type="password" name="PassWord" autocomplete="off" placeholder="请输入密码" class="je-input" checkexpession="NotNull" checkname="密码" isvalidate="true" maxlength="20" value="">
+                    </div>
+                </div>
+
+                <div class="je-form-item">
+                    <label class="je-label je-f14">重复密码<font color="red">*</font></label>
+                    <div class="je-inputbox">
+                        <input type="password" name="RePassWord" autocomplete="off" placeholder="请输入重复密码" class="je-input" checkname="重复密码" isvalidate="true" maxlength="20" value="">
+                    </div>
+                </div>
+            {% endif %}
+           
+            <div class="je-form-item">
+                <label class="je-label je-f14">性别<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <select name="Sex">
+                        <option value="true">男</option>
+                        <option value="false">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">学历</label>
+                <div class="je-inputbox">
+                    <select name="Educational">
+                        <option value=""></option>
+                       
+                            <option value="@item.FullName" >@item.FullName</option>
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">职位</label>
+                <div class="je-inputbox">
+                    <select name="Job">
+                        <option value=""></option>
+                        
+                            <option value="@item.FullName" >{{Model.Job}}</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">照片</label>
+                <div class="je-inputbox">
+                    <img id="imgPhoto" src="/Content/jeui/images/photo2.jpg" width="100" height="100" />
+                    <div style="padding-top:10px;">
+                        <input type="text" name="HeadImg" value="@Model.HeadImg" readonly class="je-input" style="width:450px">
+                        <button class="je-btn" type="button" id="btnFile">选择图片</button>
+                        <input type="file" id="fileHead" name="HeadImgFile" accept="image/png,image/jpeg,image/bmp" style="display:none;" />
+                    </div>
+
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">所属组织<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="text" name="OrgName" value="@ViewBag.OrgName" autocomplete="off" placeholder="请选择所属组织" class="je-input" checkexpession="NotNull" checkname="所属组织" isvalidate="true" readonly>
+                    <input type="hidden" name="OrgId" value="@Model.OrgId" />
+                    <ul id="tree" class="ztree" style="width: 200px; height: 300px; overflow-y: auto; background-color: #eee; border: 1px solid #bbb; z-index: 2; position: absolute;display:none;"></ul>
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">出生日期</label>
+                <div class="je-inputbox">
+                    <input type="text" name="BirthDay" autocomplete="off" placeholder="请输入出生日期" class="je-input" checkexpession="DateOrNull" checkname="出生日期" isvalidate="true" maxlength="20" value="{{Model.BirthDay|date:"F j, Y" }}">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">身份证号</label>
+                <div class="je-inputbox">
+                    <input type="text" name="IDCard" autocomplete="off" placeholder="请输入身份证" class="je-input" checkexpession="IDCardOrNull" checkname="身份证" isvalidate="true" maxlength="20" value="{{Model.IDCard}}">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">手机号码</label>
+                <div class="je-inputbox">
+                    <input type="text" name="Phone" autocomplete="off" placeholder="请输入手机号码" class="je-input" checkexpession="MobileOrNull" checkname="手机号码" isvalidate="true" maxlength="20" value="{{Model.Phone}}">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">邮箱地址</label>
+                <div class="je-inputbox">
+                    <input type="text" name="Email" autocomplete="off" placeholder="请输入邮箱地址" class="je-input" checkexpession="EmailOrNull" checkname="邮箱地址" isvalidate="true" maxlength="20" value="{{Model.Email}}">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">居住地址</label>
+                <div class="je-inputbox">
+                    <input type="text" name="Address" autocomplete="off" placeholder="请输入居住地址" class="je-input" maxlength="20" value="{{Model.Address}}">
+                </div>
+            </div>
+
+            <div class="je-form-item">
+                <label class="je-label je-f14">毕业学校</label>
+                <div class="je-inputbox">
+                    <input type="text" name="FinishSchool" autocomplete="off" placeholder="请输入毕业学校" class="je-input" maxlength="20" value="{{Model.FinishSchool}}">
+                </div>
+            </div>
+
+            <div class="je-form-item">
+                <label class="je-label je-f14">顺序号</label>
+                <div class="je-inputbox">
+                    <input type="text" name="SortNum" autocomplete="off" placeholder="请输入顺序号" class="je-input" checkexpession="NumOrNull" checkname="顺序号" isvalidate="true" maxlength="5" value="{{Model.SortNum}}">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">描述定义</label>
+                <div class="je-inputbox">
+                    <textarea name="Description" placeholder="请输入描述定义" class="je-textarea" maxlength="100">{{Model.Description}}</textarea>
+                </div>
+            </div>
+
+            <div class="je-form-item je-f14">
+                <label class="je-label je-f14"></label>
+                <button class="je-btn" id="btnOk">提 交</button>
+                <button class="je-btn je-bg-native" id="btnCancel">取 消</button>
+            </div>
+        </form>
+        <!--<form id="itemcheac">-->
+        <!--</form>-->
+
+    </div>
+    <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'adminApp/Script/jquery.form.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script src="{% static 'adminApp/Script/JValidator.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.excheck.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.exedit.js' %}"></script>
+    <script type="text/javascript">
+        var setting = {
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pId"
+                }
+            },
+            callback: {
+                onClick: function (event, treeId, treeNode) {
+                    $("input[name=OrgName]").val(treeNode.name);
+                    $("input[name=OrgId]").val(treeNode.id);
+                    $("#tree").toggle();
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "/admin/Organization/GetOrganization",
+                type: "get",
+                dataType: "json",
+                success: function (ztreeData) {
+                    $.fn.zTree.init($("#tree"), setting, ztreeData);
+                },
+                async: false//必须同步才能保证一定加载数据
+            });
+            $("input[name=OrgName]").click(function (e) {
+                e.stopPropagation();
+                $("#tree").show();
+            });
+            $("#tree").click(function (e) { e.stopPropagation() });
+            $("body").not("#tree").click(function () {
+                $("#tree").hide();
+            });
+
+            $("#btnFile").click(function () {
+                $("#fileHead").click();
+            });
+
+            
+        });
+        jeui.use(["jeBox", "jeSelect", "jeDate"], function () {
+            $("select[name=Sex]").jeSelect({ sosList: false });
+            $("select[name=Educational]").jeSelect({ sosList: false });
+            $("select[name=Job]").jeSelect({ sosList: false });
+            var index = parent.jeBox.frameIndex(window.name);
+
+
+            var start = {
+                format: 'YYYY-MM-DD',
+                //minDate: '2014-06-16', //设定最小日期为当前日期
+                //isinitVal: true,
+                //festival:true,
+                ishmsVal: false,
+                maxDate: $.nowDate({ DD: 0 }), //最大日期
+                choosefun: function (elem, val, date) {
+                    end.minDate = date; //开始日选好后，重置结束日的最小日期
+                }
+            };
+            $("input[name=BirthDay]").jeDate(start);
+
+            $('#btnOk').click(function () {
+                if (!ValidatePass($("#form1"))) {
+                    return false;
+                }
+                if ($("input[name=RePassWord]") != undefined) {
+                    if ($("input[name=RePassWord]").val() != $("input[name=PassWord]").val()) {
+                        $("input[name=RePassWord]").focus(); //焦点
+                        jeBox.msg("两次密码不一致", { icon: 1, time: 1.5 });
+                        return false;
+                    }
+                }
+                var data = $("#form1").serialize();
+                $.ajax({
+                    url: "/admin/add_user",
+                    type: "post",
+                    data: data,
+                    success: function (result) {
+                        if (result.Result) {
+                            jeBox.msg(result.Message, { icon: 2, time: 1 });
+                            setTimeout(function () {
+                                //获取窗口索引
+                                parent.location.reload();
+                                parent.jeBox.close(index);
+                            }, 1000);
+                        }
+                        else {
+                            jeBox.msg(result.Message, { icon: 3, time: 1 });
+                        }
+                    }
+                });
+                return false;
+
+            });
+            $("#fileHead").change(function () {
+                $("#form1").ajaxSubmit({
+                    url: '@Url.Action("UploadImg")',
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (json) {
+                        if (json.Result) {
+                            $("#imgPhoto").attr("src", json.ReturnVal);
+                            $("input[name=HeadImg]").val(json.ReturnVal);
+                        }
+                        else {
+                            jeBox.msg(json.Message, { icon: 3, time: 1 });
+                        }
+                    }
+                });
+            });
+
+
+            $('#btnCancel').click(function () {
+                //获取窗口索引
+                //parent.jeBox.msg('您将标记 [ ' +val + ' ] 成功传送给了父窗口');
+                parent.jeBox.close(index);
+            });
+
+        })
+
+    </script>
+
+</body>
+</html>
