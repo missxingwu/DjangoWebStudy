@@ -36,7 +36,7 @@ urlpatterns = [
     
     url(r'^admin/list_user$',app.user_list.list, name='list_user'),
     url(r'^admin/add_user$', app.user_list.edit, name='add_user'),
-    #url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
+    url(r'^admin/del_user/(\d+)', app.user_list.del_user, name='del_user'),
     #url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
 
     url(r'^adminlogin', app.adminviews.adminlogin, name='adminlogin'),

@@ -32,152 +32,152 @@
     <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
     <script type="text/javascript">
-        jeui.use(["jquery", "jeBox", "jeTable", "jeSelect"], function () {
-            $("select[name=Sex]").jeSelect({ sosList: false });
-            Search();
+    jeui.use(["jquery", "jeBox", "jeTable", "jeSelect"], function () {
+        $("select[name=Sex]").jeSelect({ sosList: false });
+        Search();
+    });
+
+    function formatdate(str, attr) {
+        if (str == null) {
+            return "null";
+        }
+        str = str.replace(/\D/igm, "");
+        if (isNaN(str)) {
+            return str;
+        } else {
+            var fmt = attr || "YYYY-MM-DD", dateNum = parseInt((str.toString()).substring(0, 10)),
+                times = new Date(dateNum * 1000);
+            var o = {
+                "M+": times.getMonth() + 1, // 月
+                "D+": times.getDate(), // 日
+                "h+": times.getHours(), // 时
+                "m+": times.getMinutes(), // 分
+                "s+": times.getSeconds(), // 秒
+                "q+": Math.floor((times.getMonth() + 3) / 3), // 季度
+                "ms": times.getMilliseconds() // 毫秒
+            };
+            if (/(Y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (times.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+            return fmt;
+        }
+    }
+    function Add() {
+        jeBox.open({
+            title: '新增',
+            type: 'iframe',
+            boxSize: ['700px', '600px'],
+            scrollbar: false,
+            content: '/admin/add_user'
         });
-
-        function formatdate(str, attr) {
-            if (str == null) {
-                return "null";
-            }
-            str = str.replace(/\D/igm, "");
-            if (isNaN(str)) {
-                return str;
-            } else {
-                var fmt = attr || "YYYY-MM-DD", dateNum = parseInt((str.toString()).substring(0, 10)),
-                    times = new Date(dateNum * 1000);
-                var o = {
-                    "M+": times.getMonth() + 1, // 月
-                    "D+": times.getDate(), // 日
-                    "h+": times.getHours(), // 时
-                    "m+": times.getMinutes(), // 分
-                    "s+": times.getSeconds(), // 秒
-                    "q+": Math.floor((times.getMonth() + 3) / 3), // 季度
-                    "ms": times.getMilliseconds() // 毫秒
-                };
-                if (/(Y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (times.getFullYear() + "").substr(4 - RegExp.$1.length));
-                for (var k in o) {
-                    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                }
-                return fmt;
-            }
-        }
-        function Add() {
-            jeBox.open({
-                title:'新增',
-                type: 'iframe',
-                boxSize: ['700px', '600px'],
-                scrollbar: false,
-                content: '/admin/add_user'
-            });
-        }
-        function Edit(keyid) {
-            jeBox.open({
-                title: '编辑',
-                type: 'iframe',
-                boxSize: ['700px', '600px'],
-                scrollbar: false,
-                content: '/admin/add_user?KeyId=' + keyid
-            });
-        }
-        function Role(keyid) {
-            jeBox.open({
-                title: '分配角色',
-                type: 'iframe',
-                boxSize: ['600px', '400px'],
-                scrollbar: false,
-                content: '/Admin/User/Role?UserId=' + keyid
-            });
-        }
-        function Delete(keyid) {
-            jeBox.open({
-                cell: "jbx",
-                title: "提示",
-                content: '您确定要删除当前数据？',
-                maskLock: true,
-                btnAlign: "center",
-                button: [
-                    {
-                        name: '确定',
-                        callback: function (index) {
-                            $.getJSON("/Admin/User/Delete", { KeyId: keyid }, function (result) {
-                                if (result.Result) {
-                                    Search();
-                                    jeBox.close(index);
-                                }
-                                else {
-                                    jeBox.msg(result.Message, { icon: 3, time: 1 });
-                                }
-                            });
-                        }
-                    },
-
-                    {
-                        name: '取消'
-                    }
-                ]
-            })
-        }
-        function Search() {
-            $("#testtwo").jeTable({
-                datas: {
-                    url: "/admin/list_user",
-                    type: "get",
-                    data: {
-                        FullName: $("#txtKey").val(),
-                        Sex: $("select[name=Sex]").val()
-                    },
-                    async: false,
-                    dataType: "json",
-                    field: "rows"
-                },
-                pageField: {
-                    pageIndex: { field: "PageIndex", num: 1 },
-                    pageSize: { field: "PageSize", num: 10 },
-                    ellipsis: true,
-                    dataCount: "totalCount",
-                    pageCount: "totalPage"
-                },
-                columnSort: [1, 2],//哪些列加排序，顺序号：索引+1
-                columns: [
-                    //{ name: 'ID', field: 'KeyId', width: "80", align: 'center', isShow: false, renderer: "" },
-                    { name: '名称', field: 'FullName', width: "200", align: 'left' },
-                    { name: '账号', field: 'Account', width: "100", align: 'left', renderer: "" },
-                    {
-                        name: '性别', field: 'Sex', width: "50", align: 'left', renderer: function (obj, rowidx) {
-                            var str = '女';
-                            if (obj.Sex) {
-                                str = '男';
+    }
+    function Edit(keyid) {
+        jeBox.open({
+            title: '编辑',
+            type: 'iframe',
+            boxSize: ['700px', '600px'],
+            scrollbar: false,
+            content: '/admin/add_user?KeyId=' + keyid
+        });
+    }
+    function Role(keyid) {
+        jeBox.open({
+            title: '分配角色',
+            type: 'iframe',
+            boxSize: ['600px', '400px'],
+            scrollbar: false,
+            content: '/Admin/User/Role?UserId=' + keyid
+        });
+    }
+    function Delete(keyid) {
+        jeBox.open({
+            cell: "jbx",
+            title: "提示",
+            content: '您确定要删除当前数据？',
+            maskLock: true,
+            btnAlign: "center",
+            button: [
+                {
+                    name: '确定',
+                    callback: function (index) {
+                        $.getJSON("/admin/del_user/" + keyid, {}, function (result) {
+                            if (result.Result) {
+                                Search();
+                                jeBox.close(index);
                             }
-                            return str;
-                        }
-                    },
-                    { name: '联系方式', field: 'Phone', width: "150", align: 'left', renderer: "" },
-                    { name: '邮箱', field: 'Email', width: "150", align: 'left', renderer: "" },
-                    { name: '所属组织', field: 'OrgName', width: "100", align: 'left', renderer: "" },
-                    { name: '职位', field: 'Job', width: "100", align: 'left', renderer: "" },
-                    {
-                        name: '创建时间', field: 'CreateDate', width: "200", align: 'left', renderer: function (obj, rowidx) {
-                            return formatdate(obj.CreateDate, "YYYY-MM-DD hh:mm:ss");
-                        }
-                    },
-                    {
-                        name: '操作', field: 'KeyId', width: "200", align: 'center', renderer: function (obj, rowidx) {
-                            var str = '<button class="je-btn je-btn-mini je-f12" onclick="Edit(\'' + obj.KeyId + '\')">编辑</button>&nbsp;&nbsp;';
-                            str += '<button class="je-btn je-btn-mini je-bg-red je-f12" onclick="Delete(\'' + obj.KeyId + '\')">删除</button>&nbsp;&nbsp;';
-                            str += '<button class="je-btn je-btn-mini je-bg-green je-f12" onclick="Role(\'' + obj.KeyId + '\')">分配角色</button>';
-                            return str;
-                        }
+                            else {
+                                jeBox.msg(result.Message, { icon: 3, time: 1 });
+                            }
+                        });
                     }
-                ],
-                itemfun: function (elem, data) {
-                    elem.on("dblclick", function () {
-                        //var trdata = $.parseJSON($(this).attr("trdata"));
-                    })
+                },
+
+                {
+                    name: '取消'
                 }
-            })
-        }
+            ]
+        })
+    }
+    function Search() {
+        $("#testtwo").jeTable({
+            datas: {
+                url: "/admin/list_user",
+                type: "get",
+                data: {
+                    FullName: $("#txtKey").val(),
+                    Sex: $("select[name=Sex]").val()
+                },
+                async: false,
+                dataType: "json",
+                field: "rows"
+            },
+            pageField: {
+                pageIndex: { field: "PageIndex", num: 1 },
+                pageSize: { field: "PageSize", num: 10 },
+                ellipsis: true,
+                dataCount: "totalCount",
+                pageCount: "totalPage"
+            },
+            columnSort: [1, 2],//哪些列加排序，顺序号：索引+1
+            columns: [
+                //{ name: 'ID', field: 'KeyId', width: "80", align: 'center', isShow: false, renderer: "" },
+                { name: '名称', field: 'FullName', width: "200", align: 'left' },
+                { name: '账号', field: 'Account', width: "100", align: 'left', renderer: "" },
+                {
+                    name: '性别', field: 'Sex', width: "50", align: 'left', renderer: function (obj, rowidx) {
+                        var str = '女';
+                        if (obj.Sex) {
+                            str = '男';
+                        }
+                        return str;
+                    }
+                },
+                { name: '联系方式', field: 'Phone', width: "150", align: 'left', renderer: "" },
+                { name: '邮箱', field: 'Email', width: "150", align: 'left', renderer: "" },
+                { name: '所属组织', field: 'OrgName', width: "100", align: 'left', renderer: "" },
+                { name: '职位', field: 'Job', width: "100", align: 'left', renderer: "" },
+                {
+                    name: '创建时间', field: 'CreateDate', width: "200", align: 'left', renderer: function (obj, rowidx) {
+                        return formatdate(obj.CreateDate, "YYYY-MM-DD hh:mm:ss");
+                    }
+                },
+                {
+                    name: '操作', field: 'KeyId', width: "200", align: 'center', renderer: function (obj, rowidx) {
+                        var str = '<button class="je-btn je-btn-mini je-f12" onclick="Edit(\'' + obj.KeyId + '\')">编辑</button>&nbsp;&nbsp;';
+                        str += '<button class="je-btn je-btn-mini je-bg-red je-f12" onclick="Delete(\'' + obj.KeyId + '\')">删除</button>&nbsp;&nbsp;';
+                        str += '<button class="je-btn je-btn-mini je-bg-green je-f12" onclick="Role(\'' + obj.KeyId + '\')">分配角色</button>';
+                        return str;
+                    }
+                }
+            ],
+            itemfun: function (elem, data) {
+                elem.on("dblclick", function () {
+                    //var trdata = $.parseJSON($(this).attr("trdata"));
+                })
+            }
+        })
+    }
     </script>
 </body>
 </html>

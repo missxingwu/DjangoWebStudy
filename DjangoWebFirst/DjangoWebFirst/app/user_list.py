@@ -111,7 +111,7 @@ def edit(request):
        name_dict = {'Result': Result, 'Msg': Msg}
        return JsonResponse(name_dict)
 
-def del_role(request,KeyId):
+def del_user(request,keyId):
      """删除用户"""
      use2r = request.session.get(settings.ADMIN_SESSION,default=None)
      if use2r is None:
@@ -119,7 +119,7 @@ def del_role(request,KeyId):
      Result = False    
      Msg = ""
      try:
-            roleModel = models.Sys_User.objects.filter(KeyId=KeyId).delete()
+            roleModel = models.Sys_User.objects.filter(KeyId=keyId).delete()
             Result = True
      except Exception as err:
            Msg = err.args     
