@@ -18,6 +18,7 @@ sys.path.append('app/ListTimeToJSon')
 
 import JsonHelp
 
+from django.db import transaction #事务
 def list(request):
     fullname = request.GET.get('FullName')    
     columns = models.Sys_User.objects.all() #models.Sys_Role.objects.filter(IsDeleted=False)
@@ -137,6 +138,7 @@ def role(request,keyId):
                          'title':'分配角色',
                          'userId':keyId})
 
+#@transaction.atomic
 def rolepost(request):
     """分配角色 """
     if request.method == "POST":
@@ -147,26 +149,23 @@ def rolepost(request):
         listRoleId = RoleIds.split(",")
         Result = False
         Msg = ""
-        try: 
-            lastpos = len(listRoleId) - 1
-            count = 0
-            while (count < len(listRoleId) - 1):
-                     models.Sys_UserRole.objects.filter(UserId =keyId).delete()
-                     userrole = models.Sys_UserRole(UserId=keyId,RoleId=listRoleId[count],DateTime=datetime.now())
-                     userrole.save()
-                     count = count + 1
-            Result = True
-            """
-            for i, x in listRoleId:
-               if lastpos != i:
-                     models.Sys_UserRole.objects.filter(UserId =keyId).delete()
-                     userrole = models.Sys_UserRole(UserId=keyId,RoleId=x,DateTime=datetime.now())
-                     userrole.save()
-                     Result = True
-             """  
+       
+
+        count = 0
+        try:
+            with transaction.atomic():
+              userrole_list_to_insert = []
+              while count < (len(listRoleId) - 1):                     
+                       userrole = models.Sys_UserRole(UserId=keyId,RoleId=listRoleId[count],DateTime=datetime.now())
+                       userrole_list_to_insert.append(userrole)
+                       count = count + 1
+              
+              models.Sys_UserRole.objects.filter(UserId =keyId).delete()
+              models.Sys_UserRole.objects.bulk_create(userrole_list_to_insert)
+              Result = True    
         except Exception as err:
-             Result = False
-             Msg = err.args
+            Result = False
+            Msg = err.args
 
         name_dict = {'Result': Result, 'Msg': Msg}
         return JsonResponse(name_dict)

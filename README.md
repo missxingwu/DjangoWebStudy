@@ -231,3 +231,54 @@
                  point = form.save(commit=False)  #在form.save(commit=False时，添加一些表单中未有的数据)
                  point.Password = "加密密文"  
                  point.save()
+
+13.0 django 事务
+    
+	django手动配置事务的方式主要有三种：第一种是将一个http request的所有数据库操作包裹在一个transaction中，第二种是通过transaction中间件对http请求的事务拦截，第三种是自己在view中通过装饰器灵活控制事务
+
+	   1.0 第一种 直接在配置文件 DATABASES 中 加上 'ATOMIC_REQUESTS' : True
+	   2.0 第二种 配置方法是在settings.py中配置MIDDLEWARE_CLASSES
+	   3.0 第三种 在view中通过装饰器灵活控制事务
+	       
+		   1.0 用装饰器 @transaction.atomic
+
+		         @transaction.atomic
+                 def rolepost(request):
+				   当 里面报错的时候，会自动回滚回去，注意 如果在 try里报错，它是不会回滚。
+
+		   2.0 用 with transaction.atomic(): 用try 包裹起来
+			    try:
+                   with transaction.atomic():
+                        userrole_list_to_insert = []
+                        while count < (len(listRoleId) - 1):                     
+                                 userrole = models.Sys_UserRole(UserId=keyId,RoleId=listRoleId[count],DateTime=datetime.now())
+                                 userrole_list_to_insert.append(userrole)
+                                 count = count + 1
+                        
+                        models.Sys_UserRole.objects.filter(UserId =keyId).delete()
+                        models.Sys_UserRole.objects.bulk_create(userrole_list_to_insert)
+                        Result = True
+    
+                except :
+                    Result = False
+		   
+		   3.0 回滚到保存点 sid = transaction.savepoint()  transaction.savepoint_commit(sid)  transaction.savepoint_rollback(sid)：
+
+                @transaction.atomic
+                def viewfunc(request):
+                
+                    a.save()
+                    # transaction now contains a.save()
+                
+                    sid = transaction.savepoint()
+                
+                    b.save()
+                    # transaction now contains a.save() and b.save()
+                
+                    if want_to_keep_b:
+                        transaction.savepoint_commit(sid)
+                        # open transaction still contains a.save() and b.save()
+                    else:
+                        transaction.savepoint_rollback(sid)
+                        # open transaction now contains only a.save()
+			 
