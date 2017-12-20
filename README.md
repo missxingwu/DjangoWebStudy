@@ -148,7 +148,7 @@
           {% endfor %}
           </ul>
 
-9.0 Django Manager 管理器
+9.0 Django Manager 管理器（待补充）
   
     1.0 添加额外的管理器方法 列：  Sys_Menu 模型里
 
@@ -237,7 +237,8 @@
 	django手动配置事务的方式主要有三种：第一种是将一个http request的所有数据库操作包裹在一个transaction中，第二种是通过transaction中间件对http请求的事务拦截，第三种是自己在view中通过装饰器灵活控制事务
 
 	   1.0 第一种 直接在配置文件 DATABASES 中 加上 'ATOMIC_REQUESTS' : True
-	   2.0 第二种 配置方法是在settings.py中配置MIDDLEWARE_CLASSES
+	   2.0 第二种 配置方法是在settings.py中配置MIDDLEWARE_CLASSES，需要注意的是，这样配置之后，与你中间件的配置顺序是有很大关系的。在 TransactionMiddleware 之后的所有中间件都会受到事务的控制。但CacheMiddleware，UpdateCacheMiddleware，FetchFromCacheMiddleware 这些中间件不会受到影响，因为cache机制有自己的处理方式，用了内部的connection来处理。另外TransactionMiddleware 只对默认的数据库配置有效，如果要对另外的数据连接用这种方式，必须自己实现中间件。（此处必须声明，对于这种方法，本人没有研究过，只是看了一下网上的资料。官网中间件文档链接：https://docs.djangoproject.com/en/2.0/ref/middleware/）
+
 	   3.0 第三种 在view中通过装饰器灵活控制事务
 	       
 		   1.0 用装饰器 @transaction.atomic
