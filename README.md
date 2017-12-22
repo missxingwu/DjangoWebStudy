@@ -21,10 +21,12 @@
      3.0 创建超级管理员 python manage.py createsuperuser (# 修改 用户密码可以用：python manage.py changepassword username)
      4.0 启动 python manage.py runserver（P.S. VS2017 可以用自带的启动直接开启项目）
 
-4.0 自定义模型
+4.0 自定义模型 和Url路由规则
      
 	 1.0 所有模型继承自models.Model，并且默认都有默认主键,自定义主键时加上primary_key=True，如： KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
 	 2.0 添加需要的模型后 更新（ python manage.py makemigrations  python manage.py migrate）先检查在更新到数据库
+
+	 路由规则和asp.net MVC 路由规则基本相似，写路由规则的时候 都是从越精准路由写前面，越模糊路由下后面，它们都是从上往下匹配。列 url配置里：按钮管理
 
 5.0 自定义后台登录页面
     
@@ -249,7 +251,7 @@
 
 		   2.0 用 with transaction.atomic(): 用try 包裹起来
 			    try:
-                   with transaction.atomic():
+                    with transaction.atomic():
                         userrole_list_to_insert = []
                         while count < (len(listRoleId) - 1):                     
                                  userrole = models.Sys_UserRole(UserId=keyId,RoleId=listRoleId[count],DateTime=datetime.now())

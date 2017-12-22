@@ -19,12 +19,18 @@ sys.path.append('app/ListTimeToJSon')
 import JsonHelp
 
 from django.db import transaction #事务
-def list(request):
+def lists(request):
     fullname = request.GET.get('FullName')    
+    sex = request.GET.get('Sex')  
     columns = models.Sys_User.objects.all() #models.Sys_Role.objects.filter(IsDeleted=False)
     if fullname != None and fullname != "": 
       columns = models.Sys_User.objects.filter(IsDeleted=False).filter(Q(Account__contains=fullname) | Q(FullName__contains=fullname) | Q(Email__contains=fullname) | Q(Phone__contains=fullname))
-
+    if sex != None and sex != "":
+        columns = columns.filter(Sex=sex)
+    
+    if sex != None or sex != "":
+        # lanmbda 表达式过滤数据
+        cos = list(tuple(filter(lambda x: x.Sex == bool(sex),columns)))
     total = int(request.GET.get('PageSize')) # 每页最多显示数据量
     if total <= 0:
         total = 2

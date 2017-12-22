@@ -83,3 +83,8 @@ def UpgradeBrowser(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
     return render(request, 'adminApp/UpgradeBrowser.html')
+
+
+def fontawesome(request):
+    """图标管理"""
+    return render(request, 'font-awesome.html')

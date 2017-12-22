@@ -173,7 +173,7 @@ class Sys_User(models.Model):
     Description = models.TextField(verbose_name="简介")
     SortNum = models.IntegerField(verbose_name="排序")
     IsDeleted = models.BooleanField(default=False, verbose_name="是否删除")
-    DateTime = models.DateTimeField(auto_now=True,verbose_name="时间")  
+    DateTime = models.DateTimeField(verbose_name="时间")  
     class Meta:
         verbose_name = "用户"
         verbose_name_plural = "用户列表"
@@ -216,7 +216,7 @@ class Sys_User_Form(ModelForm):
     class Meta:  
         model = Sys_User  
         fields = "__all__"      #或('FullName','Email','Account') # #验证哪些字段，"__all__"表示所有字段
-        exclude = ['KeyId','Educational', 'FinishSchool', 'Job','PassWord']          #排除的字段
+        exclude = ['KeyId','Educational', 'FinishSchool', 'Job','PassWord','DateTime']          #排除的字段
     #可以抛出异常 def clean_<fieldname>: 
     def clean_Account(self):
         value = self.cleaned_data['Account']
@@ -224,4 +224,10 @@ class Sys_User_Form(ModelForm):
             return value
         else:
             raise ValidationError("admin：已经存在")
+
+class Sys_Button_Form(ModelForm):  
+    class Meta:  
+        model = Sys_Button  
+        fields = "__all__"      #或('FullName','Email','Account') # #验证哪些字段，"__all__"表示所有字段
+        exclude = ['DateTime']          #排除的字段
 

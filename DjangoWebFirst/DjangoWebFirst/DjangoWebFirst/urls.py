@@ -11,6 +11,7 @@ import app.views
 import app.adminviews
 import app.role_list
 import app.user_list
+import app.button_list
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -33,15 +34,26 @@ urlpatterns = [
     url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
     url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
 
-    
-    url(r'^admin/list_user$',app.user_list.list, name='list_user'),
+     # 用户管理
+    url(r'^admin/list_user$',app.user_list.lists, name='list_user'),
     url(r'^admin/add_user$', app.user_list.edit, name='add_user'),
     url(r'^admin/del_user/(\d+)', app.user_list.del_user, name='del_user'),
     url(r'^admin/perm_user/(\d+)', app.user_list.role, name='perm_user'),
     url(r'^admin/permroledata$', app.user_list.rolepost, name='permroledata'),
 
+    # 按钮管理
+   
+    
+    url(r'^admin/button/index',app.button_list.index, name='button'),
+    url(r'^admin/button/listdata$', app.button_list.listdata, name='list_button'),
+    url(r'^admin/button/edit$', app.button_list.edit, name='edit_button'),
+    url(r'^admin/button/delete/(\d+)', app.button_list.delete, name='delete_button'),
+    url(r'^admin/button',app.button_list.index, name='button'),
+   
+
     url(r'^adminlogin', app.adminviews.adminlogin, name='adminlogin'),
     url(r'^UpgradeBrowser', app.adminviews.UpgradeBrowser, name='UpgradeBrowser'),
+    url(r'^font-awesome', app.views.fontawesome, name='font-awesome'),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {

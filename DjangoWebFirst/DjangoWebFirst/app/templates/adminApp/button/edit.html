@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="wcodeth=device-wcodeth, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/zTree/css/awesomeStyle/awesome.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="je-p20">
+        <form id="form1">
+            {% csrf_token %}
+            <div class="je-form-item">
+                <label class="je-label je-f14">按钮名称<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="text" name="FullName" autocomplete="off" placeholder="请输入按钮名称" class="je-input" checkexpession="NotNull" checkname="按钮名称" isvalidate="true" maxlength="20" value="{{Model.FullName}}">
+                    <input type="hidden" name="KeyId" value="{{Model.KeyId}}" />
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">方法名称</label>
+                <div class="je-inputbox">
+                    <input type="text" name="ButtonEvent" autocomplete="off" placeholder="例子：Add()" class="je-input" maxlength="20" value="{{Model.ButtonEvent}}">
+
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">菜单图标</label>
+                <div class="je-inputbox">
+                    <input type="text" name="Icon" autocomplete="off" placeholder="例子:aweicon aweicon-user" class="je-input" maxlength="20" value="{{Model.Icon}}">
+
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">顺序编号</label>
+                <div class="je-inputbox">
+                    <input type="text" name="SortNum" autocomplete="off" placeholder="请输入顺序编号" class="je-input" checkexpession="NumOrNull" checkname="顺序编号" isvalidate="true" maxlength="5" value="{{Model.SortNum}}">
+                </div>
+            </div>
+
+            <div class="je-form-item">
+                <label class="je-label je-f14">描述定义</label>
+                <div class="je-inputbox">
+                    <textarea name="Description" placeholder="请输入描述定义" class="je-textarea" maxlength="100">{{Model.Description}}</textarea>
+                </div>
+            </div>
+
+            <div class="je-form-item je-f14">
+                <label class="je-label je-f14"></label>
+                <button class="je-btn" id="btnOk">提 交</button>
+                <button class="je-btn je-bg-native" id="btnCancel">取 消</button>
+            </div>
+        </form>
+
+    </div>
+
+    <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'adminApp/Script/jquery.form.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script src="{% static 'adminApp/Script/JValidator.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.core.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.excheck.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/zTree/js/jquery.ztree.exedit.js' %}"></script>
+    <script type="text/javascript">
+
+        jeui.use(["jquery", "jeBox", "jeSelect"], function () {
+            var index = parent.jeBox.frameIndex(window.name);
+
+            $("select[name=ParentId]").jeSelect();
+
+            $('#btnOk').click(function () {
+                if (!ValidatePass($("#form1"))) {
+                    return false;
+                }
+                var data = $("#form1").serialize();
+                $.ajax({
+                    url: "/admin/button/edit",
+                    type: "post",
+                    data: data,
+                    success: function (result) {
+                        if (result.Result) {
+                            jeBox.msg(result.Message, { icon: 2, time: 1 });
+                            setTimeout(function () {
+                                //获取窗口索引
+                                parent.location.reload();
+                                parent.jeBox.close(index);
+                            }, 1000);
+                        }
+                        else {
+                            jeBox.msg(result.Message, { icon: 3, time: 1 });
+                        }
+                    }
+                });
+                return false;
+
+            });
+            $('#btnCancel').click(function () {
+                //获取窗口索引
+                //parent.jeBox.msg('您将标记 [ ' +val + ' ] 成功传送给了父窗口');
+                parent.jeBox.close(index);
+            });
+
+        })
+
+    </script>
+
+</body>
+</html>

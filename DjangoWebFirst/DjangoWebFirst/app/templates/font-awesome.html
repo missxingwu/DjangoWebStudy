@@ -1,0 +1,1416 @@
+﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+     {% load staticfiles %}
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="">
+
+    <title>Document</title>
+    <style>
+        .span3 {
+            width: 23%;
+            float: left;
+        }
+
+        .the-icons li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>&nbsp;&nbsp;图标对照表</h1>
+    <table>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-glass">&nbsp;</i>aweicon-glass</td>
+            <td>
+                <i class="aweicon aweicon-music">&nbsp;</i>aweicon-music</td>
+            <td>
+                <i class="aweicon aweicon-search">&nbsp;</i>aweicon-search</td>
+            <td>
+                <i class="aweicon aweicon-envelope-o">&nbsp;</i>aweicon-envelope-o</td>
+            <td>
+                <i class="aweicon aweicon-heart">&nbsp;</i>aweicon-heart</td>
+            <td>
+                <i class="aweicon aweicon-star">&nbsp;</i>aweicon-star</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-star-o">&nbsp;</i>aweicon-star-o</td>
+            <td>
+                <i class="aweicon aweicon-user">&nbsp;</i>aweicon-user</td>
+            <td>
+                <i class="aweicon aweicon-film">&nbsp;</i>aweicon-film</td>
+            <td>
+                <i class="aweicon aweicon-th-large">&nbsp;</i>aweicon-th-large</td>
+            <td>
+                <i class="aweicon aweicon-th">&nbsp;</i>aweicon-th</td>
+            <td>
+                <i class="aweicon aweicon-th-list">&nbsp;</i>aweicon-th-list</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-check">&nbsp;</i>aweicon-check</td>
+            <td>
+                <i class="aweicon aweicon-remove">&nbsp;</i>aweicon-remove</td>
+            <td>
+                <i class="aweicon aweicon-close">&nbsp;</i>aweicon-close</td>
+            <td>
+                <i class="aweicon aweicon-times">&nbsp;</i>aweicon-times</td>
+            <td>
+                <i class="aweicon aweicon-search-plus">&nbsp;</i>aweicon-search-plus</td>
+            <td>
+                <i class="aweicon aweicon-search-minus">&nbsp;</i>aweicon-search-minus</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-power-off">&nbsp;</i>aweicon-power-off</td>
+            <td>
+                <i class="aweicon aweicon-signal">&nbsp;</i>aweicon-signal</td>
+            <td>
+                <i class="aweicon aweicon-gear">&nbsp;</i>aweicon-gear</td>
+            <td>
+                <i class="aweicon aweicon-cog">&nbsp;</i>aweicon-cog</td>
+            <td>
+                <i class="aweicon aweicon-trash-o">&nbsp;</i>aweicon-trash-o</td>
+            <td>
+                <i class="aweicon aweicon-home">&nbsp;</i>aweicon-home</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-file-o">&nbsp;</i>aweicon-file-o</td>
+            <td>
+                <i class="aweicon aweicon-clock-o">&nbsp;</i>aweicon-clock-o</td>
+            <td>
+                <i class="aweicon aweicon-road">&nbsp;</i>aweicon-road</td>
+            <td>
+                <i class="aweicon aweicon-download">&nbsp;</i>aweicon-download</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-o-down">&nbsp;</i>aweicon-arrow-circle-o-down</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-o-up">&nbsp;</i>aweicon-arrow-circle-o-up</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-inbox">&nbsp;</i>aweicon-inbox</td>
+            <td>
+                <i class="aweicon aweicon-play-circle-o">&nbsp;</i>aweicon-play-circle-o</td>
+            <td>
+                <i class="aweicon aweicon-rotate-right">&nbsp;</i>aweicon-rotate-right</td>
+            <td>
+                <i class="aweicon aweicon-repeat">&nbsp;</i>aweicon-repeat</td>
+            <td>
+                <i class="aweicon aweicon-refresh">&nbsp;</i>aweicon-refresh</td>
+            <td>
+                <i class="aweicon aweicon-list-alt">&nbsp;</i>aweicon-list-alt</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-lock">&nbsp;</i>aweicon-lock</td>
+            <td>
+                <i class="aweicon aweicon-flag">&nbsp;</i>aweicon-flag</td>
+            <td>
+                <i class="aweicon aweicon-headphones">&nbsp;</i>aweicon-headphones</td>
+            <td>
+                <i class="aweicon aweicon-volume-off">&nbsp;</i>aweicon-volume-off</td>
+            <td>
+                <i class="aweicon aweicon-volume-down">&nbsp;</i>aweicon-volume-down</td>
+            <td>
+                <i class="aweicon aweicon-volume-up">&nbsp;</i>aweicon-volume-up</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-qrcode">&nbsp;</i>aweicon-qrcode</td>
+            <td>
+                <i class="aweicon aweicon-barcode">&nbsp;</i>aweicon-barcode</td>
+            <td>
+                <i class="aweicon aweicon-tag">&nbsp;</i>aweicon-tag</td>
+            <td>
+                <i class="aweicon aweicon-tags">&nbsp;</i>aweicon-tags</td>
+            <td>
+                <i class="aweicon aweicon-book">&nbsp;</i>aweicon-book</td>
+            <td>
+                <i class="aweicon aweicon-bookmark">&nbsp;</i>aweicon-bookmark</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-print">&nbsp;</i>aweicon-print</td>
+            <td>
+                <i class="aweicon aweicon-camera">&nbsp;</i>aweicon-camera</td>
+            <td>
+                <i class="aweicon aweicon-font">&nbsp;</i>aweicon-font</td>
+            <td>
+                <i class="aweicon aweicon-bold">&nbsp;</i>aweicon-bold</td>
+            <td>
+                <i class="aweicon aweicon-italic">&nbsp;</i>aweicon-italic</td>
+            <td>
+                <i class="aweicon aweicon-text-height">&nbsp;</i>aweicon-text-height</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-text-width">&nbsp;</i>aweicon-text-width</td>
+            <td>
+                <i class="aweicon aweicon-align-left">&nbsp;</i>aweicon-align-left</td>
+            <td>
+                <i class="aweicon aweicon-align-center">&nbsp;</i>aweicon-align-center</td>
+            <td>
+                <i class="aweicon aweicon-align-right">&nbsp;</i>aweicon-align-right</td>
+            <td>
+                <i class="aweicon aweicon-align-justify">&nbsp;</i>aweicon-align-justify</td>
+            <td>
+                <i class="aweicon aweicon-list">&nbsp;</i>aweicon-list</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-dedent">&nbsp;</i>aweicon-dedent</td>
+            <td>
+                <i class="aweicon aweicon-outdent">&nbsp;</i>aweicon-outdent</td>
+            <td>
+                <i class="aweicon aweicon-indent">&nbsp;</i>aweicon-indent</td>
+            <td>
+                <i class="aweicon aweicon-video-camera">&nbsp;</i>aweicon-video-camera</td>
+            <td>
+                <i class="aweicon aweicon-photo">&nbsp;</i>aweicon-photo</td>
+            <td>
+                <i class="aweicon aweicon-image">&nbsp;</i>aweicon-image</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-picture-o">&nbsp;</i>aweicon-picture-o</td>
+            <td>
+                <i class="aweicon aweicon-pencil">&nbsp;</i>aweicon-pencil</td>
+            <td>
+                <i class="aweicon aweicon-map-marker">&nbsp;</i>aweicon-map-marker</td>
+            <td>
+                <i class="aweicon aweicon-adjust">&nbsp;</i>aweicon-adjust</td>
+            <td>
+                <i class="aweicon aweicon-tint">&nbsp;</i>aweicon-tint</td>
+            <td>
+                <i class="aweicon aweicon-edit">&nbsp;</i>aweicon-edit</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-pencil-square-o">&nbsp;</i>aweicon-pencil-square-o</td>
+            <td>
+                <i class="aweicon aweicon-share-square-o">&nbsp;</i>aweicon-share-square-o</td>
+            <td>
+                <i class="aweicon aweicon-check-square-o">&nbsp;</i>aweicon-check-square-o</td>
+            <td>
+                <i class="aweicon aweicon-arrows">&nbsp;</i>aweicon-arrows</td>
+            <td>
+                <i class="aweicon aweicon-step-backward">&nbsp;</i>aweicon-step-backward</td>
+            <td>
+                <i class="aweicon aweicon-fast-backward">&nbsp;</i>aweicon-fast-backward</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-backward">&nbsp;</i>aweicon-backward</td>
+            <td>
+                <i class="aweicon aweicon-play">&nbsp;</i>aweicon-play</td>
+            <td>
+                <i class="aweicon aweicon-pause">&nbsp;</i>aweicon-pause</td>
+            <td>
+                <i class="aweicon aweicon-stop">&nbsp;</i>aweicon-stop</td>
+            <td>
+                <i class="aweicon aweicon-forward">&nbsp;</i>aweicon-forward</td>
+            <td>
+                <i class="aweicon aweicon-fast-forward">&nbsp;</i>aweicon-fast-forward</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-step-forward">&nbsp;</i>aweicon-step-forward</td>
+            <td>
+                <i class="aweicon aweicon-eject">&nbsp;</i>aweicon-eject</td>
+            <td>
+                <i class="aweicon aweicon-chevron-left">&nbsp;</i>aweicon-chevron-left</td>
+            <td>
+                <i class="aweicon aweicon-chevron-right">&nbsp;</i>aweicon-chevron-right</td>
+            <td>
+                <i class="aweicon aweicon-plus-circle">&nbsp;</i>aweicon-plus-circle</td>
+            <td>
+                <i class="aweicon aweicon-minus-circle">&nbsp;</i>aweicon-minus-circle</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-times-circle">&nbsp;</i>aweicon-times-circle</td>
+            <td>
+                <i class="aweicon aweicon-check-circle">&nbsp;</i>aweicon-check-circle</td>
+            <td>
+                <i class="aweicon aweicon-question-circle">&nbsp;</i>aweicon-question-circle</td>
+            <td>
+                <i class="aweicon aweicon-info-circle">&nbsp;</i>aweicon-info-circle</td>
+            <td>
+                <i class="aweicon aweicon-crosshairs">&nbsp;</i>aweicon-crosshairs</td>
+            <td>
+                <i class="aweicon aweicon-times-circle-o">&nbsp;</i>aweicon-times-circle-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-check-circle-o">&nbsp;</i>aweicon-check-circle-o</td>
+            <td>
+                <i class="aweicon aweicon-ban">&nbsp;</i>aweicon-ban</td>
+            <td>
+                <i class="aweicon aweicon-arrow-left">&nbsp;</i>aweicon-arrow-left</td>
+            <td>
+                <i class="aweicon aweicon-arrow-right">&nbsp;</i>aweicon-arrow-right</td>
+            <td>
+                <i class="aweicon aweicon-arrow-up">&nbsp;</i>aweicon-arrow-up</td>
+            <td>
+                <i class="aweicon aweicon-arrow-down">&nbsp;</i>aweicon-arrow-down</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-mail-forward">&nbsp;</i>aweicon-mail-forward</td>
+            <td>
+                <i class="aweicon aweicon-share">&nbsp;</i>aweicon-share</td>
+            <td>
+                <i class="aweicon aweicon-expand">&nbsp;</i>aweicon-expand</td>
+            <td>
+                <i class="aweicon aweicon-compress">&nbsp;</i>aweicon-compress</td>
+            <td>
+                <i class="aweicon aweicon-plus">&nbsp;</i>aweicon-plus</td>
+            <td>
+                <i class="aweicon aweicon-minus">&nbsp;</i>aweicon-minus</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-asterisk">&nbsp;</i>aweicon-asterisk</td>
+            <td>
+                <i class="aweicon aweicon-exclamation-circle">&nbsp;</i>aweicon-exclamation-circle</td>
+            <td>
+                <i class="aweicon aweicon-gift">&nbsp;</i>aweicon-gift</td>
+            <td>
+                <i class="aweicon aweicon-leaf">&nbsp;</i>aweicon-leaf</td>
+            <td>
+                <i class="aweicon aweicon-fire">&nbsp;</i>aweicon-fire</td>
+            <td>
+                <i class="aweicon aweicon-eye">&nbsp;</i>aweicon-eye</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-eye-slash">&nbsp;</i>aweicon-eye-slash</td>
+            <td>
+                <i class="aweicon aweicon-warning">&nbsp;</i>aweicon-warning</td>
+            <td>
+                <i class="aweicon aweicon-exclamation-triangle">&nbsp;</i>aweicon-exclamation-triangle</td>
+            <td>
+                <i class="aweicon aweicon-plane">&nbsp;</i>aweicon-plane</td>
+            <td>
+                <i class="aweicon aweicon-calendar">&nbsp;</i>aweicon-calendar</td>
+            <td>
+                <i class="aweicon aweicon-random">&nbsp;</i>aweicon-random</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-comment">&nbsp;</i>aweicon-comment</td>
+            <td>
+                <i class="aweicon aweicon-magnet">&nbsp;</i>aweicon-magnet</td>
+            <td>
+                <i class="aweicon aweicon-chevron-up">&nbsp;</i>aweicon-chevron-up</td>
+            <td>
+                <i class="aweicon aweicon-chevron-down">&nbsp;</i>aweicon-chevron-down</td>
+            <td>
+                <i class="aweicon aweicon-retweet">&nbsp;</i>aweicon-retweet</td>
+            <td>
+                <i class="aweicon aweicon-shopping-cart">&nbsp;</i>aweicon-shopping-cart</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-folder">&nbsp;</i>aweicon-folder</td>
+            <td>
+                <i class="aweicon aweicon-folder-open">&nbsp;</i>aweicon-folder-open</td>
+            <td>
+                <i class="aweicon aweicon-arrows-v">&nbsp;</i>aweicon-arrows-v</td>
+            <td>
+                <i class="aweicon aweicon-arrows-h">&nbsp;</i>aweicon-arrows-h</td>
+            <td>
+                <i class="aweicon aweicon-bar-chart-o">&nbsp;</i>aweicon-bar-chart-o</td>
+            <td>
+                <i class="aweicon aweicon-bar-chart">&nbsp;</i>aweicon-bar-chart</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-twitter-square">&nbsp;</i>aweicon-twitter-square</td>
+            <td>
+                <i class="aweicon aweicon-facebook-square">&nbsp;</i>aweicon-facebook-square</td>
+            <td>
+                <i class="aweicon aweicon-camera-retro">&nbsp;</i>aweicon-camera-retro</td>
+            <td>
+                <i class="aweicon aweicon-key">&nbsp;</i>aweicon-key</td>
+            <td>
+                <i class="aweicon aweicon-gears">&nbsp;</i>aweicon-gears</td>
+            <td>
+                <i class="aweicon aweicon-cogs">&nbsp;</i>aweicon-cogs</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-comments">&nbsp;</i>aweicon-comments</td>
+            <td>
+                <i class="aweicon aweicon-thumbs-o-up">&nbsp;</i>aweicon-thumbs-o-up</td>
+            <td>
+                <i class="aweicon aweicon-thumbs-o-down">&nbsp;</i>aweicon-thumbs-o-down</td>
+            <td>
+                <i class="aweicon aweicon-star-half">&nbsp;</i>aweicon-star-half</td>
+            <td>
+                <i class="aweicon aweicon-heart-o">&nbsp;</i>aweicon-heart-o</td>
+            <td>
+                <i class="aweicon aweicon-sign-out">&nbsp;</i>aweicon-sign-out</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-linkedin-square">&nbsp;</i>aweicon-linkedin-square</td>
+            <td>
+                <i class="aweicon aweicon-thumb-tack">&nbsp;</i>aweicon-thumb-tack</td>
+            <td>
+                <i class="aweicon aweicon-external-link">&nbsp;</i>aweicon-external-link</td>
+            <td>
+                <i class="aweicon aweicon-sign-in">&nbsp;</i>aweicon-sign-in</td>
+            <td>
+                <i class="aweicon aweicon-trophy">&nbsp;</i>aweicon-trophy</td>
+            <td>
+                <i class="aweicon aweicon-github-square">&nbsp;</i>aweicon-github-square</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-upload">&nbsp;</i>aweicon-upload</td>
+            <td>
+                <i class="aweicon aweicon-lemon-o">&nbsp;</i>aweicon-lemon-o</td>
+            <td>
+                <i class="aweicon aweicon-phone">&nbsp;</i>aweicon-phone</td>
+            <td>
+                <i class="aweicon aweicon-square-o">&nbsp;</i>aweicon-square-o</td>
+            <td>
+                <i class="aweicon aweicon-bookmark-o">&nbsp;</i>aweicon-bookmark-o</td>
+            <td>
+                <i class="aweicon aweicon-phone-square">&nbsp;</i>aweicon-phone-square</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-twitter">&nbsp;</i>aweicon-twitter</td>
+            <td>
+                <i class="aweicon aweicon-facebook-f">&nbsp;</i>aweicon-facebook-f</td>
+            <td>
+                <i class="aweicon aweicon-facebook">&nbsp;</i>aweicon-facebook</td>
+            <td>
+                <i class="aweicon aweicon-github">&nbsp;</i>aweicon-github</td>
+            <td>
+                <i class="aweicon aweicon-unlock">&nbsp;</i>aweicon-unlock</td>
+            <td>
+                <i class="aweicon aweicon-credit-card">&nbsp;</i>aweicon-credit-card</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-rss">&nbsp;</i>aweicon-rss</td>
+            <td>
+                <i class="aweicon aweicon-hdd-o">&nbsp;</i>aweicon-hdd-o</td>
+            <td>
+                <i class="aweicon aweicon-bullhorn">&nbsp;</i>aweicon-bullhorn</td>
+            <td>
+                <i class="aweicon aweicon-bell">&nbsp;</i>aweicon-bell</td>
+            <td>
+                <i class="aweicon aweicon-certificate">&nbsp;</i>aweicon-certificate</td>
+            <td>
+                <i class="aweicon aweicon-hand-o-right">&nbsp;</i>aweicon-hand-o-right</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-hand-o-left">&nbsp;</i>aweicon-hand-o-left</td>
+            <td>
+                <i class="aweicon aweicon-hand-o-up">&nbsp;</i>aweicon-hand-o-up</td>
+            <td>
+                <i class="aweicon aweicon-hand-o-down">&nbsp;</i>aweicon-hand-o-down</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-left">&nbsp;</i>aweicon-arrow-circle-left</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-right">&nbsp;</i>aweicon-arrow-circle-right</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-up">&nbsp;</i>aweicon-arrow-circle-up</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-down">&nbsp;</i>aweicon-arrow-circle-down</td>
+            <td>
+                <i class="aweicon aweicon-globe">&nbsp;</i>aweicon-globe</td>
+            <td>
+                <i class="aweicon aweicon-wrench">&nbsp;</i>aweicon-wrench</td>
+            <td>
+                <i class="aweicon aweicon-tasks">&nbsp;</i>aweicon-tasks</td>
+            <td>
+                <i class="aweicon aweicon-filter">&nbsp;</i>aweicon-filter</td>
+            <td>
+                <i class="aweicon aweicon-briefcase">&nbsp;</i>aweicon-briefcase</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-arrows-alt">&nbsp;</i>aweicon-arrows-alt</td>
+            <td>
+                <i class="aweicon aweicon-group">&nbsp;</i>aweicon-group</td>
+            <td>
+                <i class="aweicon aweicon-users">&nbsp;</i>aweicon-users</td>
+            <td>
+                <i class="aweicon aweicon-chain">&nbsp;</i>aweicon-chain</td>
+            <td>
+                <i class="aweicon aweicon-link">&nbsp;</i>aweicon-link</td>
+            <td>
+                <i class="aweicon aweicon-cloud">&nbsp;</i>aweicon-cloud</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-flask">&nbsp;</i>aweicon-flask</td>
+            <td>
+                <i class="aweicon aweicon-cut">&nbsp;</i>aweicon-cut</td>
+            <td>
+                <i class="aweicon aweicon-scissors">&nbsp;</i>aweicon-scissors</td>
+            <td>
+                <i class="aweicon aweicon-copy">&nbsp;</i>aweicon-copy</td>
+            <td>
+                <i class="aweicon aweicon-files-o">&nbsp;</i>aweicon-files-o</td>
+            <td>
+                <i class="aweicon aweicon-paperclip">&nbsp;</i>aweicon-paperclip</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-save">&nbsp;</i>aweicon-save</td>
+            <td>
+                <i class="aweicon aweicon-floppy-o">&nbsp;</i>aweicon-floppy-o</td>
+            <td>
+                <i class="aweicon aweicon-square">&nbsp;</i>aweicon-square</td>
+            <td>
+                <i class="aweicon aweicon-navicon">&nbsp;</i>aweicon-navicon</td>
+            <td>
+                <i class="aweicon aweicon-reorder">&nbsp;</i>aweicon-reorder</td>
+            <td>
+                <i class="aweicon aweicon-bars">&nbsp;</i>aweicon-bars</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-list-ul">&nbsp;</i>aweicon-list-ul</td>
+            <td>
+                <i class="aweicon aweicon-list-ol">&nbsp;</i>aweicon-list-ol</td>
+            <td>
+                <i class="aweicon aweicon-strikethrough">&nbsp;</i>aweicon-strikethrough</td>
+            <td>
+                <i class="aweicon aweicon-underline">&nbsp;</i>aweicon-underline</td>
+            <td>
+                <i class="aweicon aweicon-table">&nbsp;</i>aweicon-table</td>
+            <td>
+                <i class="aweicon aweicon-magic">&nbsp;</i>aweicon-magic</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-truck">&nbsp;</i>aweicon-truck</td>
+            <td>
+                <i class="aweicon aweicon-pinterest">&nbsp;</i>aweicon-pinterest</td>
+            <td>
+                <i class="aweicon aweicon-pinterest-square">&nbsp;</i>aweicon-pinterest-square</td>
+            <td>
+                <i class="aweicon aweicon-google-plus-square">&nbsp;</i>aweicon-google-plus-square</td>
+            <td>
+                <i class="aweicon aweicon-google-plus">&nbsp;</i>aweicon-google-plus</td>
+            <td>
+                <i class="aweicon aweicon-money">&nbsp;</i>aweicon-money</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-caret-down">&nbsp;</i>aweicon-caret-down</td>
+            <td>
+                <i class="aweicon aweicon-caret-up">&nbsp;</i>aweicon-caret-up</td>
+            <td>
+                <i class="aweicon aweicon-caret-left">&nbsp;</i>aweicon-caret-left</td>
+            <td>
+                <i class="aweicon aweicon-caret-right">&nbsp;</i>aweicon-caret-right</td>
+            <td>
+                <i class="aweicon aweicon-columns">&nbsp;</i>aweicon-columns</td>
+            <td>
+                <i class="aweicon aweicon-unsorted">&nbsp;</i>aweicon-unsorted</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-sort">&nbsp;</i>aweicon-sort</td>
+            <td>
+                <i class="aweicon aweicon-sort-down">&nbsp;</i>aweicon-sort-down</td>
+            <td>
+                <i class="aweicon aweicon-sort-desc">&nbsp;</i>aweicon-sort-desc</td>
+            <td>
+                <i class="aweicon aweicon-sort-up">&nbsp;</i>aweicon-sort-up</td>
+            <td>
+                <i class="aweicon aweicon-sort-asc">&nbsp;</i>aweicon-sort-asc</td>
+            <td>
+                <i class="aweicon aweicon-envelope">&nbsp;</i>aweicon-envelope</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-linkedin">&nbsp;</i>aweicon-linkedin</td>
+            <td>
+                <i class="aweicon aweicon-rotate-left">&nbsp;</i>aweicon-rotate-left</td>
+            <td>
+                <i class="aweicon aweicon-undo">&nbsp;</i>aweicon-undo</td>
+            <td>
+                <i class="aweicon aweicon-legal">&nbsp;</i>aweicon-legal</td>
+            <td>
+                <i class="aweicon aweicon-gavel">&nbsp;</i>aweicon-gavel</td>
+            <td>
+                <i class="aweicon aweicon-dashboard">&nbsp;</i>aweicon-dashboard</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-tachometer">&nbsp;</i>aweicon-tachometer</td>
+            <td>
+                <i class="aweicon aweicon-comment-o">&nbsp;</i>aweicon-comment-o</td>
+            <td>
+                <i class="aweicon aweicon-comments-o">&nbsp;</i>aweicon-comments-o</td>
+            <td>
+                <i class="aweicon aweicon-flash">&nbsp;</i>aweicon-flash</td>
+            <td>
+                <i class="aweicon aweicon-bolt">&nbsp;</i>aweicon-bolt</td>
+            <td>
+                <i class="aweicon aweicon-sitemap">&nbsp;</i>aweicon-sitemap</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-umbrella">&nbsp;</i>aweicon-umbrella</td>
+            <td>
+                <i class="aweicon aweicon-paste">&nbsp;</i>aweicon-paste</td>
+            <td>
+                <i class="aweicon aweicon-clipboard">&nbsp;</i>aweicon-clipboard</td>
+            <td>
+                <i class="aweicon aweicon-lightbulb-o">&nbsp;</i>aweicon-lightbulb-o</td>
+            <td>
+                <i class="aweicon aweicon-exchange">&nbsp;</i>aweicon-exchange</td>
+            <td>
+                <i class="aweicon aweicon-cloud-download">&nbsp;</i>aweicon-cloud-download</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-cloud-upload">&nbsp;</i>aweicon-cloud-upload</td>
+            <td>
+                <i class="aweicon aweicon-user-md">&nbsp;</i>aweicon-user-md</td>
+            <td>
+                <i class="aweicon aweicon-stethoscope">&nbsp;</i>aweicon-stethoscope</td>
+            <td>
+                <i class="aweicon aweicon-suitcase">&nbsp;</i>aweicon-suitcase</td>
+            <td>
+                <i class="aweicon aweicon-bell-o">&nbsp;</i>aweicon-bell-o</td>
+            <td>
+                <i class="aweicon aweicon-coffee">&nbsp;</i>aweicon-coffee</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-cutlery">&nbsp;</i>aweicon-cutlery</td>
+            <td>
+                <i class="aweicon aweicon-file-text-o">&nbsp;</i>aweicon-file-text-o</td>
+            <td>
+                <i class="aweicon aweicon-building-o">&nbsp;</i>aweicon-building-o</td>
+            <td>
+                <i class="aweicon aweicon-hospital-o">&nbsp;</i>aweicon-hospital-o</td>
+            <td>
+                <i class="aweicon aweicon-ambulance">&nbsp;</i>aweicon-ambulance</td>
+            <td>
+                <i class="aweicon aweicon-medkit">&nbsp;</i>aweicon-medkit</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-fighter-jet">&nbsp;</i>aweicon-fighter-jet</td>
+            <td>
+                <i class="aweicon aweicon-beer">&nbsp;</i>aweicon-beer</td>
+            <td>
+                <i class="aweicon aweicon-h-square">&nbsp;</i>aweicon-h-square</td>
+            <td>
+                <i class="aweicon aweicon-plus-square">&nbsp;</i>aweicon-plus-square</td>
+            <td>
+                <i class="aweicon aweicon-angle-double-left">&nbsp;</i>aweicon-angle-double-left</td>
+            <td>
+                <i class="aweicon aweicon-angle-double-right">&nbsp;</i>aweicon-angle-double-right</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-angle-double-up">&nbsp;</i>aweicon-angle-double-up</td>
+            <td>
+                <i class="aweicon aweicon-angle-double-down">&nbsp;</i>aweicon-angle-double-down</td>
+            <td>
+                <i class="aweicon aweicon-angle-left">&nbsp;</i>aweicon-angle-left</td>
+            <td>
+                <i class="aweicon aweicon-angle-right">&nbsp;</i>aweicon-angle-right</td>
+            <td>
+                <i class="aweicon aweicon-angle-up">&nbsp;</i>aweicon-angle-up</td>
+            <td>
+                <i class="aweicon aweicon-angle-down">&nbsp;</i>aweicon-angle-down</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-desktop">&nbsp;</i>aweicon-desktop</td>
+            <td>
+                <i class="aweicon aweicon-laptop">&nbsp;</i>aweicon-laptop</td>
+            <td>
+                <i class="aweicon aweicon-tablet">&nbsp;</i>aweicon-tablet</td>
+            <td>
+                <i class="aweicon aweicon-mobile-phone">&nbsp;</i>aweicon-mobile-phone</td>
+            <td>
+                <i class="aweicon aweicon-mobile">&nbsp;</i>aweicon-mobile</td>
+            <td>
+                <i class="aweicon aweicon-circle-o">&nbsp;</i>aweicon-circle-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-quote-left">&nbsp;</i>aweicon-quote-left</td>
+            <td>
+                <i class="aweicon aweicon-quote-right">&nbsp;</i>aweicon-quote-right</td>
+            <td>
+                <i class="aweicon aweicon-spinner">&nbsp;</i>aweicon-spinner</td>
+            <td>
+                <i class="aweicon aweicon-circle">&nbsp;</i>aweicon-circle</td>
+            <td>
+                <i class="aweicon aweicon-mail-reply">&nbsp;</i>aweicon-mail-reply</td>
+            <td>
+                <i class="aweicon aweicon-reply">&nbsp;</i>aweicon-reply</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-github-alt">&nbsp;</i>aweicon-github-alt</td>
+            <td>
+                <i class="aweicon aweicon-folder-o">&nbsp;</i>aweicon-folder-o</td>
+            <td>
+                <i class="aweicon aweicon-folder-open-o">&nbsp;</i>aweicon-folder-open-o</td>
+            <td>
+                <i class="aweicon aweicon-smile-o">&nbsp;</i>aweicon-smile-o</td>
+            <td>
+                <i class="aweicon aweicon-frown-o">&nbsp;</i>aweicon-frown-o</td>
+            <td>
+                <i class="aweicon aweicon-meh-o">&nbsp;</i>aweicon-meh-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-gamepad">&nbsp;</i>aweicon-gamepad</td>
+            <td>
+                <i class="aweicon aweicon-keyboard-o">&nbsp;</i>aweicon-keyboard-o</td>
+            <td>
+                <i class="aweicon aweicon-flag-o">&nbsp;</i>aweicon-flag-o</td>
+            <td>
+                <i class="aweicon aweicon-flag-checkered">&nbsp;</i>aweicon-flag-checkered</td>
+            <td>
+                <i class="aweicon aweicon-terminal">&nbsp;</i>aweicon-terminal</td>
+            <td>
+                <i class="aweicon aweicon-code">&nbsp;</i>aweicon-code</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-mail-reply-all">&nbsp;</i>aweicon-mail-reply-all</td>
+            <td>
+                <i class="aweicon aweicon-reply-all">&nbsp;</i>aweicon-reply-all</td>
+            <td>
+                <i class="aweicon aweicon-star-half-empty">&nbsp;</i>aweicon-star-half-empty</td>
+            <td>
+                <i class="aweicon aweicon-star-half-full">&nbsp;</i>aweicon-star-half-full</td>
+            <td>
+                <i class="aweicon aweicon-star-half-o">&nbsp;</i>aweicon-star-half-o</td>
+            <td>
+                <i class="aweicon aweicon-location-arrow">&nbsp;</i>aweicon-location-arrow</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-crop">&nbsp;</i>aweicon-crop</td>
+            <td>
+                <i class="aweicon aweicon-code-fork">&nbsp;</i>aweicon-code-fork</td>
+            <td>
+                <i class="aweicon aweicon-unlink">&nbsp;</i>aweicon-unlink</td>
+            <td>
+                <i class="aweicon aweicon-chain-broken">&nbsp;</i>aweicon-chain-broken</td>
+            <td>
+                <i class="aweicon aweicon-question">&nbsp;</i>aweicon-question</td>
+            <td>
+                <i class="aweicon aweicon-info">&nbsp;</i>aweicon-info</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-exclamation">&nbsp;</i>aweicon-exclamation</td>
+            <td>
+                <i class="aweicon aweicon-superscript">&nbsp;</i>aweicon-superscript</td>
+            <td>
+                <i class="aweicon aweicon-subscript">&nbsp;</i>aweicon-subscript</td>
+            <td>
+                <i class="aweicon aweicon-eraser">&nbsp;</i>aweicon-eraser</td>
+            <td>
+                <i class="aweicon aweicon-puzzle-piece">&nbsp;</i>aweicon-puzzle-piece</td>
+            <td>
+                <i class="aweicon aweicon-microphone">&nbsp;</i>aweicon-microphone</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-microphone-slash">&nbsp;</i>aweicon-microphone-slash</td>
+            <td>
+                <i class="aweicon aweicon-shield">&nbsp;</i>aweicon-shield</td>
+            <td>
+                <i class="aweicon aweicon-calendar-o">&nbsp;</i>aweicon-calendar-o</td>
+            <td>
+                <i class="aweicon aweicon-fire-extinguisher">&nbsp;</i>aweicon-fire-extinguisher</td>
+            <td>
+                <i class="aweicon aweicon-rocket">&nbsp;</i>aweicon-rocket</td>
+            <td>
+                <i class="aweicon aweicon-maxcdn">&nbsp;</i>aweicon-maxcdn</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-chevron-circle-left">&nbsp;</i>aweicon-chevron-circle-left</td>
+            <td>
+                <i class="aweicon aweicon-chevron-circle-right">&nbsp;</i>aweicon-chevron-circle-right</td>
+            <td>
+                <i class="aweicon aweicon-chevron-circle-up">&nbsp;</i>aweicon-chevron-circle-up</td>
+            <td>
+                <i class="aweicon aweicon-chevron-circle-down">&nbsp;</i>aweicon-chevron-circle-down</td>
+            <td>
+                <i class="aweicon aweicon-html5">&nbsp;</i>aweicon-html5</td>
+            <td>
+                <i class="aweicon aweicon-css3">&nbsp;</i>aweicon-css3</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-anchor">&nbsp;</i>aweicon-anchor</td>
+            <td>
+                <i class="aweicon aweicon-unlock-alt">&nbsp;</i>aweicon-unlock-alt</td>
+            <td>
+                <i class="aweicon aweicon-bullseye">&nbsp;</i>aweicon-bullseye</td>
+            <td>
+                <i class="aweicon aweicon-ellipsis-h">&nbsp;</i>aweicon-ellipsis-h</td>
+            <td>
+                <i class="aweicon aweicon-ellipsis-v">&nbsp;</i>aweicon-ellipsis-v</td>
+            <td>
+                <i class="aweicon aweicon-rss-square">&nbsp;</i>aweicon-rss-square</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-play-circle">&nbsp;</i>aweicon-play-circle</td>
+            <td>
+                <i class="aweicon aweicon-ticket">&nbsp;</i>aweicon-ticket</td>
+            <td>
+                <i class="aweicon aweicon-minus-square">&nbsp;</i>aweicon-minus-square</td>
+            <td>
+                <i class="aweicon aweicon-minus-square-o">&nbsp;</i>aweicon-minus-square-o</td>
+            <td>
+                <i class="aweicon aweicon-level-up">&nbsp;</i>aweicon-level-up</td>
+            <td>
+                <i class="aweicon aweicon-level-down">&nbsp;</i>aweicon-level-down</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-check-square">&nbsp;</i>aweicon-check-square</td>
+            <td>
+                <i class="aweicon aweicon-pencil-square">&nbsp;</i>aweicon-pencil-square</td>
+            <td>
+                <i class="aweicon aweicon-external-link-square">&nbsp;</i>aweicon-external-link-square</td>
+            <td>
+                <i class="aweicon aweicon-share-square">&nbsp;</i>aweicon-share-square</td>
+            <td>
+                <i class="aweicon aweicon-compass">&nbsp;</i>aweicon-compass</td>
+            <td>
+                <i class="aweicon aweicon-toggle-down">&nbsp;</i>aweicon-toggle-down</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-caret-square-o-down">&nbsp;</i>aweicon-caret-square-o-down</td>
+            <td>
+                <i class="aweicon aweicon-toggle-up">&nbsp;</i>aweicon-toggle-up</td>
+            <td>
+                <i class="aweicon aweicon-caret-square-o-up">&nbsp;</i>aweicon-caret-square-o-up</td>
+            <td>
+                <i class="aweicon aweicon-toggle-right">&nbsp;</i>aweicon-toggle-right</td>
+            <td>
+                <i class="aweicon aweicon-caret-square-o-right">&nbsp;</i>aweicon-caret-square-o-right</td>
+            <td>
+                <i class="aweicon aweicon-euro">&nbsp;</i>aweicon-euro</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-eur">&nbsp;</i>aweicon-eur</td>
+            <td>
+                <i class="aweicon aweicon-gbp">&nbsp;</i>aweicon-gbp</td>
+            <td>
+                <i class="aweicon aweicon-dollar">&nbsp;</i>aweicon-dollar</td>
+            <td>
+                <i class="aweicon aweicon-usd">&nbsp;</i>aweicon-usd</td>
+            <td>
+                <i class="aweicon aweicon-rupee">&nbsp;</i>aweicon-rupee</td>
+            <td>
+                <i class="aweicon aweicon-inr">&nbsp;</i>aweicon-inr</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-cny">&nbsp;</i>aweicon-cny</td>
+            <td>
+                <i class="aweicon aweicon-rmb">&nbsp;</i>aweicon-rmb</td>
+            <td>
+                <i class="aweicon aweicon-yen">&nbsp;</i>aweicon-yen</td>
+            <td>
+                <i class="aweicon aweicon-jpy">&nbsp;</i>aweicon-jpy</td>
+            <td>
+                <i class="aweicon aweicon-ruble">&nbsp;</i>aweicon-ruble</td>
+            <td>
+                <i class="aweicon aweicon-rouble">&nbsp;</i>aweicon-rouble</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-rub">&nbsp;</i>aweicon-rub</td>
+            <td>
+                <i class="aweicon aweicon-won">&nbsp;</i>aweicon-won</td>
+            <td>
+                <i class="aweicon aweicon-krw">&nbsp;</i>aweicon-krw</td>
+            <td>
+                <i class="aweicon aweicon-bitcoin">&nbsp;</i>aweicon-bitcoin</td>
+            <td>
+                <i class="aweicon aweicon-btc">&nbsp;</i>aweicon-btc</td>
+            <td>
+                <i class="aweicon aweicon-file">&nbsp;</i>aweicon-file</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-file-text">&nbsp;</i>aweicon-file-text</td>
+            <td>
+                <i class="aweicon aweicon-sort-alpha-asc">&nbsp;</i>aweicon-sort-alpha-asc</td>
+            <td>
+                <i class="aweicon aweicon-sort-alpha-desc">&nbsp;</i>aweicon-sort-alpha-desc</td>
+            <td>
+                <i class="aweicon aweicon-sort-amount-asc">&nbsp;</i>aweicon-sort-amount-asc</td>
+            <td>
+                <i class="aweicon aweicon-sort-amount-desc">&nbsp;</i>aweicon-sort-amount-desc</td>
+            <td>
+                <i class="aweicon aweicon-sort-numeric-asc">&nbsp;</i>aweicon-sort-numeric-asc</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-sort-numeric-desc">&nbsp;</i>aweicon-sort-numeric-desc</td>
+            <td>
+                <i class="aweicon aweicon-thumbs-up">&nbsp;</i>aweicon-thumbs-up</td>
+            <td>
+                <i class="aweicon aweicon-thumbs-down">&nbsp;</i>aweicon-thumbs-down</td>
+            <td>
+                <i class="aweicon aweicon-youtube-square">&nbsp;</i>aweicon-youtube-square</td>
+            <td>
+                <i class="aweicon aweicon-youtube">&nbsp;</i>aweicon-youtube</td>
+            <td>
+                <i class="aweicon aweicon-xing">&nbsp;</i>aweicon-xing</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-xing-square">&nbsp;</i>aweicon-xing-square</td>
+            <td>
+                <i class="aweicon aweicon-youtube-play">&nbsp;</i>aweicon-youtube-play</td>
+            <td>
+                <i class="aweicon aweicon-dropbox">&nbsp;</i>aweicon-dropbox</td>
+            <td>
+                <i class="aweicon aweicon-stack-overflow">&nbsp;</i>aweicon-stack-overflow</td>
+            <td>
+                <i class="aweicon aweicon-instagram">&nbsp;</i>aweicon-instagram</td>
+            <td>
+                <i class="aweicon aweicon-flickr">&nbsp;</i>aweicon-flickr</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-adn">&nbsp;</i>aweicon-adn</td>
+            <td>
+                <i class="aweicon aweicon-bitbucket">&nbsp;</i>aweicon-bitbucket</td>
+            <td>
+                <i class="aweicon aweicon-bitbucket-square">&nbsp;</i>aweicon-bitbucket-square</td>
+            <td>
+                <i class="aweicon aweicon-tumblr">&nbsp;</i>aweicon-tumblr</td>
+            <td>
+                <i class="aweicon aweicon-tumblr-square">&nbsp;</i>aweicon-tumblr-square</td>
+            <td>
+                <i class="aweicon aweicon-long-arrow-down">&nbsp;</i>aweicon-long-arrow-down</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-long-arrow-up">&nbsp;</i>aweicon-long-arrow-up</td>
+            <td>
+                <i class="aweicon aweicon-long-arrow-left">&nbsp;</i>aweicon-long-arrow-left</td>
+            <td>
+                <i class="aweicon aweicon-long-arrow-right">&nbsp;</i>aweicon-long-arrow-right</td>
+            <td>
+                <i class="aweicon aweicon-apple">&nbsp;</i>aweicon-apple</td>
+            <td>
+                <i class="aweicon aweicon-windows">&nbsp;</i>aweicon-windows</td>
+            <td>
+                <i class="aweicon aweicon-android">&nbsp;</i>aweicon-android</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-linux">&nbsp;</i>aweicon-linux</td>
+            <td>
+                <i class="aweicon aweicon-dribbble">&nbsp;</i>aweicon-dribbble</td>
+            <td>
+                <i class="aweicon aweicon-skype">&nbsp;</i>aweicon-skype</td>
+            <td>
+                <i class="aweicon aweicon-foursquare">&nbsp;</i>aweicon-foursquare</td>
+            <td>
+                <i class="aweicon aweicon-trello">&nbsp;</i>aweicon-trello</td>
+            <td>
+                <i class="aweicon aweicon-female">&nbsp;</i>aweicon-female</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-male">&nbsp;</i>aweicon-male</td>
+            <td>
+                <i class="aweicon aweicon-gittip">&nbsp;</i>aweicon-gittip</td>
+            <td>
+                <i class="aweicon aweicon-gratipay">&nbsp;</i>aweicon-gratipay</td>
+            <td>
+                <i class="aweicon aweicon-sun-o">&nbsp;</i>aweicon-sun-o</td>
+            <td>
+                <i class="aweicon aweicon-moon-o">&nbsp;</i>aweicon-moon-o</td>
+            <td>
+                <i class="aweicon aweicon-archive">&nbsp;</i>aweicon-archive</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-bug">&nbsp;</i>aweicon-bug</td>
+            <td>
+                <i class="aweicon aweicon-vk">&nbsp;</i>aweicon-vk</td>
+            <td>
+                <i class="aweicon aweicon-weibo">&nbsp;</i>aweicon-weibo</td>
+            <td>
+                <i class="aweicon aweicon-renren">&nbsp;</i>aweicon-renren</td>
+            <td>
+                <i class="aweicon aweicon-pagelines">&nbsp;</i>aweicon-pagelines</td>
+            <td>
+                <i class="aweicon aweicon-stack-exchange">&nbsp;</i>aweicon-stack-exchange</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-o-right">&nbsp;</i>aweicon-arrow-circle-o-right</td>
+            <td>
+                <i class="aweicon aweicon-arrow-circle-o-left">&nbsp;</i>aweicon-arrow-circle-o-left</td>
+            <td>
+                <i class="aweicon aweicon-toggle-left">&nbsp;</i>aweicon-toggle-left</td>
+            <td>
+                <i class="aweicon aweicon-caret-square-o-left">&nbsp;</i>aweicon-caret-square-o-left</td>
+            <td>
+                <i class="aweicon aweicon-dot-circle-o">&nbsp;</i>aweicon-dot-circle-o</td>
+            <td>
+                <i class="aweicon aweicon-wheelchair">&nbsp;</i>aweicon-wheelchair</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-vimeo-square">&nbsp;</i>aweicon-vimeo-square</td>
+            <td>
+                <i class="aweicon aweicon-turkish-lira">&nbsp;</i>aweicon-turkish-lira</td>
+            <td>
+                <i class="aweicon aweicon-try">&nbsp;</i>aweicon-try</td>
+            <td>
+                <i class="aweicon aweicon-plus-square-o">&nbsp;</i>aweicon-plus-square-o</td>
+            <td>
+                <i class="aweicon aweicon-space-shuttle">&nbsp;</i>aweicon-space-shuttle</td>
+            <td>
+                <i class="aweicon aweicon-slack">&nbsp;</i>aweicon-slack</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-envelope-square">&nbsp;</i>aweicon-envelope-square</td>
+            <td>
+                <i class="aweicon aweicon-wordpress">&nbsp;</i>aweicon-wordpress</td>
+            <td>
+                <i class="aweicon aweicon-openid">&nbsp;</i>aweicon-openid</td>
+            <td>
+                <i class="aweicon aweicon-institution">&nbsp;</i>aweicon-institution</td>
+            <td>
+                <i class="aweicon aweicon-bank">&nbsp;</i>aweicon-bank</td>
+            <td>
+                <i class="aweicon aweicon-university">&nbsp;</i>aweicon-university</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-mortar-board">&nbsp;</i>aweicon-mortar-board</td>
+            <td>
+                <i class="aweicon aweicon-graduation-cap">&nbsp;</i>aweicon-graduation-cap</td>
+            <td>
+                <i class="aweicon aweicon-yahoo">&nbsp;</i>aweicon-yahoo</td>
+            <td>
+                <i class="aweicon aweicon-google">&nbsp;</i>aweicon-google</td>
+            <td>
+                <i class="aweicon aweicon-reddit">&nbsp;</i>aweicon-reddit</td>
+            <td>
+                <i class="aweicon aweicon-reddit-square">&nbsp;</i>aweicon-reddit-square</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-stumbleupon-circle">&nbsp;</i>aweicon-stumbleupon-circle</td>
+            <td>
+                <i class="aweicon aweicon-stumbleupon">&nbsp;</i>aweicon-stumbleupon</td>
+            <td>
+                <i class="aweicon aweicon-delicious">&nbsp;</i>aweicon-delicious</td>
+            <td>
+                <i class="aweicon aweicon-digg">&nbsp;</i>aweicon-digg</td>
+            <td>
+                <i class="aweicon aweicon-pied-piper">&nbsp;</i>aweicon-pied-piper</td>
+            <td>
+                <i class="aweicon aweicon-pied-piper-alt">&nbsp;</i>aweicon-pied-piper-alt</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-drupal">&nbsp;</i>aweicon-drupal</td>
+            <td>
+                <i class="aweicon aweicon-joomla">&nbsp;</i>aweicon-joomla</td>
+            <td>
+                <i class="aweicon aweicon-language">&nbsp;</i>aweicon-language</td>
+            <td>
+                <i class="aweicon aweicon-fax">&nbsp;</i>aweicon-fax</td>
+            <td>
+                <i class="aweicon aweicon-building">&nbsp;</i>aweicon-building</td>
+            <td>
+                <i class="aweicon aweicon-child">&nbsp;</i>aweicon-child</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-paw">&nbsp;</i>aweicon-paw</td>
+            <td>
+                <i class="aweicon aweicon-spoon">&nbsp;</i>aweicon-spoon</td>
+            <td>
+                <i class="aweicon aweicon-cube">&nbsp;</i>aweicon-cube</td>
+            <td>
+                <i class="aweicon aweicon-cubes">&nbsp;</i>aweicon-cubes</td>
+            <td>
+                <i class="aweicon aweicon-behance">&nbsp;</i>aweicon-behance</td>
+            <td>
+                <i class="aweicon aweicon-behance-square">&nbsp;</i>aweicon-behance-square</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-steam">&nbsp;</i>aweicon-steam</td>
+            <td>
+                <i class="aweicon aweicon-steam-square">&nbsp;</i>aweicon-steam-square</td>
+            <td>
+                <i class="aweicon aweicon-recycle">&nbsp;</i>aweicon-recycle</td>
+            <td>
+                <i class="aweicon aweicon-automobile">&nbsp;</i>aweicon-automobile</td>
+            <td>
+                <i class="aweicon aweicon-car">&nbsp;</i>aweicon-car</td>
+            <td>
+                <i class="aweicon aweicon-cab">&nbsp;</i>aweicon-cab</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-taxi">&nbsp;</i>aweicon-taxi</td>
+            <td>
+                <i class="aweicon aweicon-tree">&nbsp;</i>aweicon-tree</td>
+            <td>
+                <i class="aweicon aweicon-spotify">&nbsp;</i>aweicon-spotify</td>
+            <td>
+                <i class="aweicon aweicon-deviantart">&nbsp;</i>aweicon-deviantart</td>
+            <td>
+                <i class="aweicon aweicon-soundcloud">&nbsp;</i>aweicon-soundcloud</td>
+            <td>
+                <i class="aweicon aweicon-database">&nbsp;</i>aweicon-database</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-file-pdf-o">&nbsp;</i>aweicon-file-pdf-o</td>
+            <td>
+                <i class="aweicon aweicon-file-word-o">&nbsp;</i>aweicon-file-word-o</td>
+            <td>
+                <i class="aweicon aweicon-file-excel-o">&nbsp;</i>aweicon-file-excel-o</td>
+            <td>
+                <i class="aweicon aweicon-file-powerpoint-o">&nbsp;</i>aweicon-file-powerpoint-o</td>
+            <td>
+                <i class="aweicon aweicon-file-photo-o">&nbsp;</i>aweicon-file-photo-o</td>
+            <td>
+                <i class="aweicon aweicon-file-picture-o">&nbsp;</i>aweicon-file-picture-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-file-image-o">&nbsp;</i>aweicon-file-image-o</td>
+            <td>
+                <i class="aweicon aweicon-file-zip-o">&nbsp;</i>aweicon-file-zip-o</td>
+            <td>
+                <i class="aweicon aweicon-file-archive-o">&nbsp;</i>aweicon-file-archive-o</td>
+            <td>
+                <i class="aweicon aweicon-file-sound-o">&nbsp;</i>aweicon-file-sound-o</td>
+            <td>
+                <i class="aweicon aweicon-file-audio-o">&nbsp;</i>aweicon-file-audio-o</td>
+            <td>
+                <i class="aweicon aweicon-file-movie-o">&nbsp;</i>aweicon-file-movie-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-file-video-o">&nbsp;</i>aweicon-file-video-o</td>
+            <td>
+                <i class="aweicon aweicon-file-code-o">&nbsp;</i>aweicon-file-code-o</td>
+            <td>
+                <i class="aweicon aweicon-vine">&nbsp;</i>aweicon-vine</td>
+            <td>
+                <i class="aweicon aweicon-codepen">&nbsp;</i>aweicon-codepen</td>
+            <td>
+                <i class="aweicon aweicon-jsfiddle">&nbsp;</i>aweicon-jsfiddle</td>
+            <td>
+                <i class="aweicon aweicon-life-bouy">&nbsp;</i>aweicon-life-bouy</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-life-buoy">&nbsp;</i>aweicon-life-buoy</td>
+            <td>
+                <i class="aweicon aweicon-life-saver">&nbsp;</i>aweicon-life-saver</td>
+            <td>
+                <i class="aweicon aweicon-support">&nbsp;</i>aweicon-support</td>
+            <td>
+                <i class="aweicon aweicon-life-ring">&nbsp;</i>aweicon-life-ring</td>
+            <td>
+                <i class="aweicon aweicon-circle-o-notch">&nbsp;</i>aweicon-circle-o-notch</td>
+            <td>
+                <i class="aweicon aweicon-ra">&nbsp;</i>aweicon-ra</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-rebel">&nbsp;</i>aweicon-rebel</td>
+            <td>
+                <i class="aweicon aweicon-ge">&nbsp;</i>aweicon-ge</td>
+            <td>
+                <i class="aweicon aweicon-empire">&nbsp;</i>aweicon-empire</td>
+            <td>
+                <i class="aweicon aweicon-git-square">&nbsp;</i>aweicon-git-square</td>
+            <td>
+                <i class="aweicon aweicon-git">&nbsp;</i>aweicon-git</td>
+            <td>
+                <i class="aweicon aweicon-hacker-news">&nbsp;</i>aweicon-hacker-news</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-tencent-weibo">&nbsp;</i>aweicon-tencent-weibo</td>
+            <td>
+                <i class="aweicon aweicon-qq">&nbsp;</i>aweicon-qq</td>
+            <td>
+                <i class="aweicon aweicon-wechat">&nbsp;</i>aweicon-wechat</td>
+            <td>
+                <i class="aweicon aweicon-weixin">&nbsp;</i>aweicon-weixin</td>
+            <td>
+                <i class="aweicon aweicon-send">&nbsp;</i>aweicon-send</td>
+            <td>
+                <i class="aweicon aweicon-paper-plane">&nbsp;</i>aweicon-paper-plane</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-send-o">&nbsp;</i>aweicon-send-o</td>
+            <td>
+                <i class="aweicon aweicon-paper-plane-o">&nbsp;</i>aweicon-paper-plane-o</td>
+            <td>
+                <i class="aweicon aweicon-history">&nbsp;</i>aweicon-history</td>
+            <td>
+                <i class="aweicon aweicon-genderless">&nbsp;</i>aweicon-genderless</td>
+            <td>
+                <i class="aweicon aweicon-circle-thin">&nbsp;</i>aweicon-circle-thin</td>
+            <td>
+                <i class="aweicon aweicon-header">&nbsp;</i>aweicon-header</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-paragraph">&nbsp;</i>aweicon-paragraph</td>
+            <td>
+                <i class="aweicon aweicon-sliders">&nbsp;</i>aweicon-sliders</td>
+            <td>
+                <i class="aweicon aweicon-share-alt">&nbsp;</i>aweicon-share-alt</td>
+            <td>
+                <i class="aweicon aweicon-share-alt-square">&nbsp;</i>aweicon-share-alt-square</td>
+            <td>
+                <i class="aweicon aweicon-bomb">&nbsp;</i>aweicon-bomb</td>
+            <td>
+                <i class="aweicon aweicon-soccer-ball-o">&nbsp;</i>aweicon-soccer-ball-o</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-futbol-o">&nbsp;</i>aweicon-futbol-o</td>
+            <td>
+                <i class="aweicon aweicon-tty">&nbsp;</i>aweicon-tty</td>
+            <td>
+                <i class="aweicon aweicon-binoculars">&nbsp;</i>aweicon-binoculars</td>
+            <td>
+                <i class="aweicon aweicon-plug">&nbsp;</i>aweicon-plug</td>
+            <td>
+                <i class="aweicon aweicon-slideshare">&nbsp;</i>aweicon-slideshare</td>
+            <td>
+                <i class="aweicon aweicon-twitch">&nbsp;</i>aweicon-twitch</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-yelp">&nbsp;</i>aweicon-yelp</td>
+            <td>
+                <i class="aweicon aweicon-newspaper-o">&nbsp;</i>aweicon-newspaper-o</td>
+            <td>
+                <i class="aweicon aweicon-wifi">&nbsp;</i>aweicon-wifi</td>
+            <td>
+                <i class="aweicon aweicon-calculator">&nbsp;</i>aweicon-calculator</td>
+            <td>
+                <i class="aweicon aweicon-paypal">&nbsp;</i>aweicon-paypal</td>
+            <td>
+                <i class="aweicon aweicon-google-wallet">&nbsp;</i>aweicon-google-wallet</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-cc-visa">&nbsp;</i>aweicon-cc-visa</td>
+            <td>
+                <i class="aweicon aweicon-cc-mastercard">&nbsp;</i>aweicon-cc-mastercard</td>
+            <td>
+                <i class="aweicon aweicon-cc-discover">&nbsp;</i>aweicon-cc-discover</td>
+            <td>
+                <i class="aweicon aweicon-cc-amex">&nbsp;</i>aweicon-cc-amex</td>
+            <td>
+                <i class="aweicon aweicon-cc-paypal">&nbsp;</i>aweicon-cc-paypal</td>
+            <td>
+                <i class="aweicon aweicon-cc-stripe">&nbsp;</i>aweicon-cc-stripe</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-bell-slash">&nbsp;</i>aweicon-bell-slash</td>
+            <td>
+                <i class="aweicon aweicon-bell-slash-o">&nbsp;</i>aweicon-bell-slash-o</td>
+            <td>
+                <i class="aweicon aweicon-trash">&nbsp;</i>aweicon-trash</td>
+            <td>
+                <i class="aweicon aweicon-copyright">&nbsp;</i>aweicon-copyright</td>
+            <td>
+                <i class="aweicon aweicon-at">&nbsp;</i>aweicon-at</td>
+            <td>
+                <i class="aweicon aweicon-eyedropper">&nbsp;</i>aweicon-eyedropper</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-paint-brush">&nbsp;</i>aweicon-paint-brush</td>
+            <td>
+                <i class="aweicon aweicon-birthday-cake">&nbsp;</i>aweicon-birthday-cake</td>
+            <td>
+                <i class="aweicon aweicon-area-chart">&nbsp;</i>aweicon-area-chart</td>
+            <td>
+                <i class="aweicon aweicon-pie-chart">&nbsp;</i>aweicon-pie-chart</td>
+            <td>
+                <i class="aweicon aweicon-line-chart">&nbsp;</i>aweicon-line-chart</td>
+            <td>
+                <i class="aweicon aweicon-lastfm">&nbsp;</i>aweicon-lastfm</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-lastfm-square">&nbsp;</i>aweicon-lastfm-square</td>
+            <td>
+                <i class="aweicon aweicon-toggle-off">&nbsp;</i>aweicon-toggle-off</td>
+            <td>
+                <i class="aweicon aweicon-toggle-on">&nbsp;</i>aweicon-toggle-on</td>
+            <td>
+                <i class="aweicon aweicon-bicycle">&nbsp;</i>aweicon-bicycle</td>
+            <td>
+                <i class="aweicon aweicon-bus">&nbsp;</i>aweicon-bus</td>
+            <td>
+                <i class="aweicon aweicon-ioxhost">&nbsp;</i>aweicon-ioxhost</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-angellist">&nbsp;</i>aweicon-angellist</td>
+            <td>
+                <i class="aweicon aweicon-cc">&nbsp;</i>aweicon-cc</td>
+            <td>
+                <i class="aweicon aweicon-shekel">&nbsp;</i>aweicon-shekel</td>
+            <td>
+                <i class="aweicon aweicon-sheqel">&nbsp;</i>aweicon-sheqel</td>
+            <td>
+                <i class="aweicon aweicon-ils">&nbsp;</i>aweicon-ils</td>
+            <td>
+                <i class="aweicon aweicon-meanpath">&nbsp;</i>aweicon-meanpath</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-buysellads">&nbsp;</i>aweicon-buysellads</td>
+            <td>
+                <i class="aweicon aweicon-connectdevelop">&nbsp;</i>aweicon-connectdevelop</td>
+            <td>
+                <i class="aweicon aweicon-dashcube">&nbsp;</i>aweicon-dashcube</td>
+            <td>
+                <i class="aweicon aweicon-forumbee">&nbsp;</i>aweicon-forumbee</td>
+            <td>
+                <i class="aweicon aweicon-leanpub">&nbsp;</i>aweicon-leanpub</td>
+            <td>
+                <i class="aweicon aweicon-sellsy">&nbsp;</i>aweicon-sellsy</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-shirtsinbulk">&nbsp;</i>aweicon-shirtsinbulk</td>
+            <td>
+                <i class="aweicon aweicon-simplybuilt">&nbsp;</i>aweicon-simplybuilt</td>
+            <td>
+                <i class="aweicon aweicon-skyatlas">&nbsp;</i>aweicon-skyatlas</td>
+            <td>
+                <i class="aweicon aweicon-cart-plus">&nbsp;</i>aweicon-cart-plus</td>
+            <td>
+                <i class="aweicon aweicon-cart-arrow-down">&nbsp;</i>aweicon-cart-arrow-down</td>
+            <td>
+                <i class="aweicon aweicon-diamond">&nbsp;</i>aweicon-diamond</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-ship">&nbsp;</i>aweicon-ship</td>
+            <td>
+                <i class="aweicon aweicon-user-secret">&nbsp;</i>aweicon-user-secret</td>
+            <td>
+                <i class="aweicon aweicon-motorcycle">&nbsp;</i>aweicon-motorcycle</td>
+            <td>
+                <i class="aweicon aweicon-street-view">&nbsp;</i>aweicon-street-view</td>
+            <td>
+                <i class="aweicon aweicon-heartbeat">&nbsp;</i>aweicon-heartbeat</td>
+            <td>
+                <i class="aweicon aweicon-venus">&nbsp;</i>aweicon-venus</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-mars">&nbsp;</i>aweicon-mars</td>
+            <td>
+                <i class="aweicon aweicon-mercury">&nbsp;</i>aweicon-mercury</td>
+            <td>
+                <i class="aweicon aweicon-transgender">&nbsp;</i>aweicon-transgender</td>
+            <td>
+                <i class="aweicon aweicon-transgender-alt">&nbsp;</i>aweicon-transgender-alt</td>
+            <td>
+                <i class="aweicon aweicon-venus-double">&nbsp;</i>aweicon-venus-double</td>
+            <td>
+                <i class="aweicon aweicon-mars-double">&nbsp;</i>aweicon-mars-double</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-venus-mars">&nbsp;</i>aweicon-venus-mars</td>
+            <td>
+                <i class="aweicon aweicon-mars-stroke">&nbsp;</i>aweicon-mars-stroke</td>
+            <td>
+                <i class="aweicon aweicon-mars-stroke-v">&nbsp;</i>aweicon-mars-stroke-v</td>
+            <td>
+                <i class="aweicon aweicon-mars-stroke-h">&nbsp;</i>aweicon-mars-stroke-h</td>
+            <td>
+                <i class="aweicon aweicon-neuter">&nbsp;</i>aweicon-neuter</td>
+            <td>
+                <i class="aweicon aweicon-facebook-official">&nbsp;</i>aweicon-facebook-official</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-pinterest-p">&nbsp;</i>aweicon-pinterest-p</td>
+            <td>
+                <i class="aweicon aweicon-whatsapp">&nbsp;</i>aweicon-whatsapp</td>
+            <td>
+                <i class="aweicon aweicon-server">&nbsp;</i>aweicon-server</td>
+            <td>
+                <i class="aweicon aweicon-user-plus">&nbsp;</i>aweicon-user-plus</td>
+            <td>
+                <i class="aweicon aweicon-user-times">&nbsp;</i>aweicon-user-times</td>
+            <td>
+                <i class="aweicon aweicon-hotel">&nbsp;</i>aweicon-hotel</td>
+        </tr>
+        <tr>
+            <td>
+                <i class="aweicon aweicon-bed">&nbsp;</i>aweicon-bed</td>
+            <td>
+                <i class="aweicon aweicon-viacoin">&nbsp;</i>aweicon-viacoin</td>
+            <td>
+                <i class="aweicon aweicon-train">&nbsp;</i>aweicon-train</td>
+            <td>
+                <i class="aweicon aweicon-subway">&nbsp;</i>aweicon-subway</td>
+            <td>
+                <i class="aweicon aweicon-medium">&nbsp;</i>aweicon-medium</td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
