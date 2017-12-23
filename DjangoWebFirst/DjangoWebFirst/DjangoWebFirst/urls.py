@@ -12,6 +12,7 @@ import app.adminviews
 import app.role_list
 import app.user_list
 import app.button_list
+import app.views_menu
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
@@ -42,13 +43,21 @@ urlpatterns = [
     url(r'^admin/permroledata$', app.user_list.rolepost, name='permroledata'),
 
     # 按钮管理
-   
-    
     url(r'^admin/button/index',app.button_list.index, name='button'),
     url(r'^admin/button/listdata$', app.button_list.listdata, name='list_button'),
     url(r'^admin/button/edit$', app.button_list.edit, name='edit_button'),
     url(r'^admin/button/delete/(\d+)', app.button_list.delete, name='delete_button'),
     url(r'^admin/button',app.button_list.index, name='button'),
+
+     # 菜单管理
+    url(r'^admin/menu/index',app.views_menu.index, name='menu'),
+    url(r'^admin/menu/listdata$', app.views_menu.listdata, name='list_menu'),
+    url(r'^admin/menu/edit$', app.views_menu.edit, name='edit_menu'),
+    url(r'^admin/menu/delete/(\d+)', app.views_menu.delete, name='delete_menu'),
+    url(r'^admin/menu/button/(\d+)', app.views_menu.button, name='menubutton'),
+    url(r'^admin/menu/savebutton', app.views_menu.savebutton, name='buttonlist'),
+    url(r'^admin/menu',app.views_menu.index, name='menu'),
+
    
 
     url(r'^adminlogin', app.adminviews.adminlogin, name='adminlogin'),

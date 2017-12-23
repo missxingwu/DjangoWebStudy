@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="wcodeth=device-wcodeth, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/zTree/css/awesomeStyle/awesome.css' %}" rel="stylesheet" />   
+</head>
+<body>
+    <input id="MenuId" type="hidden" value="{{KeyId}}" />
+    <div style="height:250px;overflow-y:auto;">
+        {% for item in  Model %}
+        
+            <input id="{{item.KeyId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{item.FullName}}">
+       {% endfor%}
+    </div>
+    <div style="padding-top:30px;">
+        <button class="je-btn" id="btnOk">提 交</button>
+        <button class="je-btn je-bg-native" id="btnCancel">取 消</button>
+    </div>
+
+   
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+        var index = parent.jeBox.frameIndex(window.name);
+        jeui.use(["jquery", "jeBox", "jeCheck"], function () {
+            $("div").jeCheck({ jename: "checkbox" });
+
+            //绑定菜单按钮
+            $.getJSON("/admin/menu/savebutton", { MenuId: $("#MenuId").val() }, function (data) {
+                debugger
+                var data_json = JSON.parse(data)
+                for (var i = 0; i < data_json.length; i++) {
+                    $("#" + data_json[i].fields.ButtonId).prop("checked", true);
+                    $("#" + data_json[i].fields.ButtonId).parent().addClass("on");
+                }
+            });
+
+            $("#btnOk").click(function () {
+                var str = '';
+                $("input[type=checkbox]:checked").each(function () {
+                    str += $(this).attr("id") + ",";
+                });
+                if (str.length == 0) {
+                    jeBox.msg("请至少选一个按钮才能保存", { icon: 1, time: 2 });
+                    return;
+                }
+                $.post("/admin/menu/savebutton", { MenuId: $("#MenuId").val(), Ids: str,csrfmiddlewaretoken: '{{ csrf_token }}' }, function (result) {
+                    if (result.Result) {
+                        jeBox.msg("保存成功", { icon: 2, time: 2 });
+                        setTimeout(function () { parent.jeBox.close(index) }, 2000);
+                        return;
+                    }
+                    jeBox.msg("保存失败");
+                });
+            });
+            $("#btnCancel").click(function () {
+                parent.jeBox.close(index);
+            });
+        });
+
+
+    </script>
+
+</body>
+</html>

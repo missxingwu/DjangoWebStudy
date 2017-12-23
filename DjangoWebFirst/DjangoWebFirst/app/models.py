@@ -231,3 +231,8 @@ class Sys_Button_Form(ModelForm):
         fields = "__all__"      #或('FullName','Email','Account') # #验证哪些字段，"__all__"表示所有字段
         exclude = ['DateTime']          #排除的字段
 
+class Sys_Menu_Form(ModelForm):  
+    class Meta:  
+        model = Sys_Menu  
+        fields = "__all__"      #或('FullName','Email','Account') # #验证哪些字段，"__all__"表示所有字段
+        exclude = ['DateTime','NavigateUrl']          #排除的字段

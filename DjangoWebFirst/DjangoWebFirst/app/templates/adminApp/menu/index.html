@@ -1,0 +1,160 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <div class="je-p20">
+        <blockquote class="je-quote green je-f16 je-ovh  je-mb10">
+            <p class="je-pb5">
+                <input type="text" id="txtKey" autocomplete="off" placeholder="请输入关键字" class="je-input je-pl5 je-pr5">
+                <button class="je-btn je-f14" onclick="Search()"><i class="aweicon aweicon-search"></i>查询</button>
+                <button class="je-btn je-f14 je-bg-green" onclick="Add()"><i class="aweicon aweicon-plus">&nbsp;</i>新增</button>
+            </p>
+        </blockquote>
+        <div id="testtwo" class="je-f14"></div>
+    </div>
+    
+    <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>
+    <script src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+    jeui.use(["jquery", "jeBox", "jeTable", "jeSelect"], function () {
+        $("select[name=ParentId]").jeSelect();
+        Search();
+    });
+
+
+    function Add() {
+        jeBox.open({
+            title: '新增',
+            type: 'iframe',
+            boxSize: ['700px', '520px'],
+            scrollbar: false,
+            content: '/admin/menu/edit?KeyId=0'
+        });
+    }
+    function Edit(keyid) {
+        jeBox.open({
+            title: '编辑',
+            type: 'iframe',
+            boxSize: ['700px', '520px'],
+            scrollbar: false,
+            content: '/admin/menu/edit?KeyId=' + keyid
+        });
+    }
+    function Button(keyid) {
+        jeBox.open({
+            title: '分配按钮',
+            type: 'iframe',
+            boxSize: ['600px', '400px'],
+            scrollbar: false,
+            content: '/admin/menu/button/' + keyid
+        });
+    }
+    function Delete(keyid) {
+        jeBox.open({
+            cell: "jbx",
+            title: "提示",
+            content: '您确定要删除当前数据？',
+            maskLock: true,
+            btnAlign: "center",
+            button: [
+                {
+                    name: '确定',
+                    callback: function (index) {
+                        $.getJSON("/admin/menu/delete/" + keyid, {}, function (result) {
+                            if (result.Result) {
+                                Search();
+                                jeBox.close(index);
+                            }
+                        });
+                    }
+                },
+
+                {
+                    name: '取消'
+                }
+            ]
+        })
+    }
+    function Search() {
+        $("#testtwo").jeTable({
+            datas: {
+                url: "/admin/menu/listdata",
+                type: "get",
+                data: {
+                    FullName: $("#txtKey").val(),
+                },
+                async: false,
+                dataType: "json",
+                field: "rows"
+            },
+            pageField: {
+                pageIndex: { field: "PageIndex", num: 1 },
+                pageSize: { field: "PageSize", num: 10 },
+                ellipsis: true,
+                dataCount: "totalCount",
+                pageCount: "totalPage"
+            },
+            columnSort: [1, 2],//哪些列加排序，顺序号：索引+1
+            columns: [
+                //{ name: 'ID', field: 'KeyId', width: "80", align: 'center', isShow: false, renderer: "" },
+                { name: '菜单名称', field: 'FullName', width: "150", align: 'left' },
+                {
+                    name: '菜单链接', field: 'NavigateUrl', width: "250", align: 'left', renderer: function (obj, rowidx) {
+                        if (obj.IsRoot) {
+                            return "<font color='red'>无(根菜单)<font>";
+                        }
+                        if (obj.NavigateUrl == null || obj.NavigateUrl == "") {
+                            return "<font color='orange'>无(一级菜单)<font>";
+                        }
+                        return obj.NavigateUrl;
+                    }
+                },
+                {
+                    name: '菜单图标', field: 'Icon', width: "80", align: 'center', renderer: function (obj, rowidx) {
+                        if (obj.Icon != null) {
+                            return "<i class='" + obj.Icon + "' title='" + obj.Icon + "'><i>";
+                        }
+                        return "";
+                    }
+                },
+                { name: '描述', field: 'Description', width: "500", align: 'left', renderer: "" },
+                {
+                    name: '创建时间', field: 'CreateDate', width: "200", align: 'left', renderer: function (obj, rowidx) {
+                        var date = new Date(obj.DateTime);
+                        var result = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                        return result;
+                    }
+                },
+                {
+                    name: '操作', field: 'KeyId', width: "180", align: 'left', renderer: function (obj, rowidx) {
+                        var str = '<button class="je-btn je-btn-mini je-f12" onclick="Edit(\'' + obj.KeyId + '\')">编辑</button>&nbsp;&nbsp;';
+                        str += '<button class="je-btn je-btn-mini je-bg-red je-f12" onclick="Delete(\'' + obj.KeyId + '\')">删除</button>&nbsp;&nbsp;';
+                        if (obj.NavigateUrl != null) {
+                            str += '<button class="je-btn je-btn-mini je-bg-green je-f12" onclick="Button(\'' + obj.KeyId + '\')">分配按钮</button>';
+                        }
+                        return str;
+                    }
+                }
+            ],
+            itemfun: function (elem, data) {
+                elem.on("dblclick", function () {
+                    //var trdata = $.parseJSON($(this).attr("trdata"));
+                })
+            }
+        })
+    }
+    </script>
+</body>
+</html>

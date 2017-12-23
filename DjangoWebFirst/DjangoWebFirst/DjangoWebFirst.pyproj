@@ -55,6 +55,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="app\views.py" />
+    <Compile Include="app\views_menu.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="manage.py" />
@@ -115,6 +118,7 @@
     <Folder Include="app\static\adminApp\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\adminApp\button\" />
+    <Folder Include="app\templates\adminApp\menu\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="app\templates\adminApp\" />
     <Folder Include="DjangoWebFirst\" />
@@ -337,6 +341,9 @@
     <Content Include="app\templates\adminApp\button\edit.html" />
     <Content Include="app\templates\adminApp\button\index.html" />
     <Content Include="app\templates\adminApp\index.html" />
+    <Content Include="app\templates\adminApp\menu\button.html" />
+    <Content Include="app\templates\adminApp\menu\edit.html" />
+    <Content Include="app\templates\adminApp\menu\index.html" />
     <Content Include="app\templates\adminApp\Role.html" />
     <Content Include="app\templates\adminApp\main.html" />
     <Content Include="app\templates\adminApp\role_add.html" />
