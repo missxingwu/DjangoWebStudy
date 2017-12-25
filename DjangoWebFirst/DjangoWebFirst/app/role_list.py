@@ -16,7 +16,7 @@ import sys
 sys.path.append('app/ListTimeToJSon')
 
 import JsonHelp
-
+from django.db import transaction #事务
 def role_list(request):
     fullname = request.GET.get('FullName')    
     columns = models.Sys_Role.objects.all() #models.Sys_Role.objects.filter(IsDeleted=False)
@@ -158,3 +158,70 @@ def perm_role(request,keyId):
      except Exception as err:
          return render(request,'adminApp/role_perm.html',{'title':'分配权限','KeyId':keyId})  
     
+def permissions(request):
+     """获取权限"""
+     use2r = request.session.get(settings.ADMIN_SESSION,default=None)
+     if use2r is None:
+        return HttpResponseRedirect('/adminlogin')
+     if request.method == "GET":       
+        roleId = request.GET.get("RoleId")
+        roleMenuButtonList = models.Sys_RoleMenuButton.objects.filter(RoleId = roleId)
+        roleMenuButtonListTarr = []
+        roleMenuListTarr = []
+        for item in roleMenuButtonList:
+            roleMenuButtonListTarr.append(model_to_dict(item))
+
+    
+        roleMenuList = models.Sys_RoleMenu.objects.filter(RoleId = roleId)
+        for item in roleMenuList:
+            roleMenuListTarr.append(model_to_dict(item))
+
+        backList = {"RoleMenuList":roleMenuListTarr,"RoleMenuButtonList":roleMenuButtonListTarr}
+        backListJson = json.dumps(backList,cls =JsonHelp.DateEncoder,ensure_ascii=False)
+        return JsonResponse(backListJson,safe=False)
+     elif request.method == "POST":
+        form = request.POST
+        menuIds = form["MenuIds"]
+        buttonIds = form["ButtonIds"]
+        roleId = form["RoleId"]
+        if len(menuIds) > 0:
+           menuIds = menuIds.replace("m_","")
+        if len(buttonIds) > 0:
+           buttonIds = buttonIds.replace("m_","").replace("b_","")
+
+        Result = False    
+        Msg = ""
+        try:
+             menuId = menuIds.split(",")
+             buttonId = buttonIds.split(",")
+             with transaction.atomic():
+               role_menu_to_insert = []
+               menu_button_to_insert = []
+               count = 0
+               # 角色菜单
+               while count < (len(menuId) - 1):                     
+                     role_menu = models.Sys_RoleMenu(MenuId=menuId[count],RoleId=roleId,DateTime=datetime.now())
+                     role_menu_to_insert.append(role_menu)
+                     count = count + 1
+              # 角色菜单按钮
+               count = 0
+               while count <(len(buttonId) - 1): 
+                     item = buttonId[count].split("|")
+                     menu_btn = models.Sys_RoleMenuButton(ButtonId=item[0],MenuId=item[1],RoleId=roleId,DateTime=datetime.now())
+                     menu_button_to_insert.append(menu_btn)
+                     count = count + 1
+               
+               models.Sys_RoleMenu.objects.filter(RoleId =roleId).delete()
+               models.Sys_RoleMenuButton.objects.filter(RoleId =roleId).delete()
+
+               models.Sys_RoleMenu.objects.bulk_create(role_menu_to_insert)
+               models.Sys_RoleMenuButton.objects.bulk_create(menu_button_to_insert)
+               Result = True    
+
+               
+        except Exception as err:
+            Result = False
+            Msg = err.args
+        
+        name_dict = {'Result': Result, 'Msg': Msg}
+        return JsonResponse(name_dict)

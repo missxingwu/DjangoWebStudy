@@ -30,10 +30,15 @@ urlpatterns = [
     url(r'^admin/main', app.adminviews.main, name='main'),
     url(r'^admin/role', app.adminviews.role, name='role'),  
     url(r'^admin/user', app.adminviews.user, name='user'), 
+
+    # 角色管理
+    url(r'^admin/perm/permissions$',app.role_list.permissions,name='permissions'),
+
     url(r'^admin/add_role$',app.role_list.add_role, name='add_role'),
     url(r'^admin/list_role$', app.role_list.role_list, name='list_role'),
     url(r'^admin/del_role/(\d+)', app.role_list.del_role, name='del_role'),
     url(r'^admin/perm_role/(\d+)', app.role_list.perm_role, name='perm_role'),
+   
 
      # 用户管理
     url(r'^admin/list_user$',app.user_list.lists, name='list_user'),
@@ -42,6 +47,8 @@ urlpatterns = [
     url(r'^admin/perm_user/(\d+)', app.user_list.role, name='perm_user'),
     url(r'^admin/permroledata$', app.user_list.rolepost, name='permroledata'),
     url(r'^admin/pwd/password$',app.user_list.password,name='pwd_user'),
+
+   
 
     # 按钮管理
     url(r'^admin/button/index',app.button_list.index, name='button'),

@@ -32,7 +32,7 @@
 
                   
                     <tr menu="根菜单">
-                        <td><input ismenu="true" chkid="{{item.KeyId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{item.FullName}}"></td>
+                        <td><input ismenu="true" chkid="m_{{item.KeyId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{item.FullName}}"></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -43,7 +43,7 @@
                     
                         <tr menu="一级菜单">
                             <td></td>
-                            <td><input ismenu="true" chkid="{{x.KeyId}}" pid="{{x.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{x.FullName}}"></td>
+                            <td><input ismenu="true" chkid="m_{{x.KeyId}}" pid="m_{{x.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{x.FullName}}"></td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -53,12 +53,12 @@
                                <tr menu="二级菜单">
                                     <td></td>
                                     <td></td>
-                                    <td><input ismenu="true" chkid="{{y.KeyId}}" pid="{{y.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{y.FullName}}"></td>
+                                    <td><input ismenu="true" chkid="m_{{y.KeyId}}" pid="m_{{y.ParentId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{y.FullName}}"></td>
                                     <td menu="操作按钮">
                                     {% for z in menuButtonList %}
                                          {% for b in buttonList %}
                                            {% if z.MenuId == y.KeyId and b.KeyId == z.ButtonId %}                                   
-                                                <input ismenu="false" chkid="{{z.ButtonId}}" pid="{{z.MenuId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{b.FullName}}">
+                                                <input ismenu="false" chkid="b_{{z.ButtonId}}" pid="m_{{z.MenuId}}" type="checkbox" name="checkbox" jename="checkbox" jetext="{{b.FullName}}">
                                             {% endif %}
                                         {% endfor%}
                                   {% endfor%}
@@ -75,7 +75,7 @@
         </table>
 
         <button class="je-btn je-f14" onclick="Save(this)"><i class="aweicon aweicon-save">&nbsp;</i>保 存</button>
-
+        <input type="hidden" value="{{ csrf_token }}" id="csrfmiddlewaretoken" />
     </div>
 
     <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
@@ -103,17 +103,19 @@
                 CancelChild($(this));
             });
             //绑定角色权限
-            $.getJSON("/Admin/Role/GetPermissions", { RoleId: $("#RoleId").val() }, function (data) {
-                if (data != null) {
+            $.getJSON("/admin/perm/permissions", { RoleId: $("#RoleId").val() }, function (back_data) {
+                if (back_data != null) {
+                    debugger
+                    var data = JSON.parse(back_data)
                     //菜单
                     for (var i = 0; i < data.RoleMenuList.length; i++) {
-                        $("input[chkid=" + data.RoleMenuList[i].MenuId + "][ismenu=true]").prop("checked", true);
-                        $("input[chkid=" + data.RoleMenuList[i].MenuId + "][ismenu=true]").parent().addClass("on");
+                        $("input[chkid=m_" + data.RoleMenuList[i].MenuId + "][ismenu=true]").prop("checked", true);
+                        $("input[chkid=m_" + data.RoleMenuList[i].MenuId + "][ismenu=true]").parent().addClass("on");
                     }
                     //按钮
                     for (var i = 0; i < data.RoleMenuButtonList.length; i++) {
-                        $("input[chkid=" + data.RoleMenuButtonList[i].ButtonId + "][pid=" + data.RoleMenuButtonList[i].MenuId + "]").prop("checked", true);
-                        $("input[chkid=" + data.RoleMenuButtonList[i].ButtonId + "][pid=" + data.RoleMenuButtonList[i].MenuId + "]").parent().addClass("on");
+                        $("input[chkid=b_" + data.RoleMenuButtonList[i].ButtonId + "][pid=m_" + data.RoleMenuButtonList[i].MenuId + "]").prop("checked", true);
+                        $("input[chkid=b_" + data.RoleMenuButtonList[i].ButtonId + "][pid=m_" + data.RoleMenuButtonList[i].MenuId + "]").parent().addClass("on");
                     }
                 }
             });
@@ -158,12 +160,13 @@
 
             $(obj).prop("disabled", true);
             $.ajax({
-                url: "/Admin/Role/Save",
+                url: "/admin/perm/permissions",
                 type: "post",
                 data: {
                     MenuIds: menuids,
                     ButtonIds: buttonids,
-                    RoleId: $("#RoleId").val()
+                    RoleId: $("#RoleId").val(),
+                    csrfmiddlewaretoken: $("#csrfmiddlewaretoken").val()
                 },
                 success: function (result) {
                     if (result.Result) {
