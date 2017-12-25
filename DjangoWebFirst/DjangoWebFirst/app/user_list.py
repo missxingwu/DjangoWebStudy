@@ -138,8 +138,7 @@ def role(request,keyId):
     """分配角色 """
     if request.method == "GET":
         roleModel = models.Sys_Role.objects.filter(IsDeleted=False)
-        return render(request,
-                     'adminApp/user_role.html',{
+        return render(request,'adminApp/user_role.html',{
                          'model':roleModel,
                          'title':'分配角色',
                          'userId':keyId})
@@ -183,4 +182,52 @@ def rolepost(request):
         jsondata = serializers.serialize("json",userrolelist,ensure_ascii = False)
         return JsonResponse(jsondata,safe=False)
 
-    
+
+def password(request):
+    """用户密码修改"""
+    #assert isinstance(request, HttpRequest)
+    use2r = request.session.get(settings.ADMIN_SESSION,default=None)
+    if use2r is None:
+        return HttpResponseRedirect('/adminlogin')
+    """  字典转模型  
+       useceshi = request.session.get("ceshisession",default=None)
+       back = json.loads(useceshi)
+       back2 = models.Sys_User(**back)
+    """
+
+    if request.method == "GET":
+       try:
+            roleModel = models.Sys_User.objects.get(KeyId=keyId)
+       except Exception as err:
+           roleModel = None       
+       return render(request,'adminApp/user_pwd.html',{'Model':models.Sys_User(KeyId=0),'title':'新增'})  
+    else :
+       form = request.POST
+       oldPwd = form["OldPwd"]
+       newPwd = form["NewPwd"]
+       Result = False    
+       Msg = ""
+
+       for obj in serializers.deserialize("json", use2r):
+          
+          try:
+             if obj.object.KeyId > 0:
+                 userBykeyId = models.Sys_User.objects.get(KeyId=obj.object.KeyId)
+                 if check_password(oldPwd, userBykeyId.PassWord):
+                     userBykeyId.PassWord = make_password(newPwd)
+                     userBykeyId.save()
+                     """更新Session"""
+                     user = serializers.serialize("json", models.Sys_User.objects.filter(Account=userBykeyId.Account))                    
+                     request.session[settings.ADMIN_SESSION] = user
+                     Result = True                  
+                    
+          except Exception as err:
+                 Result = False 
+                 Msg = err.args
+
+       
+       
+     
+       # 返回Json 数据
+       name_dict = {'Result': Result, 'Msg': Msg}
+       return JsonResponse(name_dict)

@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^admin/del_user/(\d+)', app.user_list.del_user, name='del_user'),
     url(r'^admin/perm_user/(\d+)', app.user_list.role, name='perm_user'),
     url(r'^admin/permroledata$', app.user_list.rolepost, name='permroledata'),
+    url(r'^admin/pwd/password$',app.user_list.password,name='pwd_user'),
 
     # 按钮管理
     url(r'^admin/button/index',app.button_list.index, name='button'),

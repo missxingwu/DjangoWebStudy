@@ -351,6 +351,7 @@
     <Content Include="app\templates\adminApp\UpgradeBrowser.html" />
     <Content Include="app\templates\adminApp\user.html" />
     <Content Include="app\templates\adminApp\user_add.html" />
+    <Content Include="app\templates\adminApp\user_pwd.html" />
     <Content Include="app\templates\adminApp\user_role.html" />
     <Content Include="app\templates\font-awesome.html" />
     <Content Include="requirements.txt" />

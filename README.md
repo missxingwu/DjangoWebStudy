@@ -25,6 +25,7 @@
      
 	 1.0 所有模型继承自models.Model，并且默认都有默认主键,自定义主键时加上primary_key=True，如： KeyId = models.AutoField(primary_key=True,verbose_name="主键ID")
 	 2.0 添加需要的模型后 更新（ python manage.py makemigrations  python manage.py migrate）先检查在更新到数据库
+	 3.0 模型转字典: from django.forms.models import model_to_dict    model_to_dict(models.Sys_User)。字典转模型：models.Sys_User(**back)参考修改密码注释
 
 	 路由规则和asp.net MVC 路由规则基本相似，写路由规则的时候 都是从越精准路由写前面，越模糊路由下后面，它们都是从上往下匹配。列 url配置里：按钮管理
 

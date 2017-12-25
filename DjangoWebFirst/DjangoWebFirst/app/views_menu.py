@@ -76,7 +76,13 @@ def edit(request):
           keyId = 0    
           
     if request.method == "GET":
-       menuList= models.Sys_Menu.objects.filter(IsRoot = True)
+       menuList = models.Sys_Menu.objects.filter(IsRoot = True)
+       chint = []
+       menuListCh = []
+       for item in menuList:
+          chint.append(item.KeyId)    
+       menuListCh = models.Sys_Menu.objects.filter(ParentId__in =chint)
+    
        try:
             roleModel = models.Sys_Menu.objects.get(KeyId=keyId)
        except Exception as err:
@@ -85,9 +91,9 @@ def edit(request):
            return render(request,
                  'adminApp/menu/edit.html',{
                      'Model':roleModel,
-                     'title':'修改','listData':menuList})
+                     'title':'修改','listData':menuList,'menuListCh':menuListCh})
        else:
-           return render(request,'adminApp/menu/edit.html',{'Model':models.Sys_Menu(KeyId=0),'title':'新增','listData':menuList})  
+           return render(request,'adminApp/menu/edit.html',{'Model':models.Sys_Menu(KeyId=0),'title':'新增','listData':menuList,'menuListCh':menuListCh})  
     else :
        form = request.POST
        keyId = int(form["KeyId"])
@@ -138,14 +144,14 @@ def delete(request,KeyId):
 
 def button(request,KeyId):
     """获取按钮"""
-    model=models.Sys_Button.objects.filter(IsDeleted =False).order_by('SortNum')
+    model = models.Sys_Button.objects.filter(IsDeleted =False).order_by('SortNum')
     return render(request, 'adminApp/menu/button.html',{'title':'分配按钮','Model':model,'KeyId':KeyId}) 
 
 def  savebutton(request):
     """操作按钮"""
     if request.method == "GET":
-         keyId=int(request.GET.get('MenuId'))
-         list=models.Sys_MenuButton.objects.filter(MenuId =keyId);
+         keyId = int(request.GET.get('MenuId'))
+         list = models.Sys_MenuButton.objects.filter(MenuId =keyId)
     
          if len(list) < 1:
              return JsonResponse("",safe=False)

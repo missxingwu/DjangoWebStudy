@@ -1,0 +1,95 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% load staticfiles %}
+    
+    <link href="{% static 'adminApp/jeui/css/jeui.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jebox.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/jeui/css/skin/jedate.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/font-awesome/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'adminApp/zTree/css/awesomeStyle/awesome.css' %}" rel="stylesheet" /> {% csrf_token %}
+</head>
+<body>
+    <div class="je-p20">
+        
+    <div class="je-p20">
+        <blockquote class="je-quote green je-f16 je-ovh  je-mb10">
+            <p class="je-pb5">
+                <h2>修改密码</h2>
+            </p>
+        </blockquote>
+        <form id="form1">
+            <div class="je-form-item">
+                <label class="je-label je-f14">旧密码<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="password" name="OldPassWord" autocomplete="off" placeholder="请输入旧密码" class="je-input" checkexpession="NotNull" checkname="旧密码" isvalidate="true" maxlength="20">
+                </div>
+            </div>
+            <div class="je-form-item">
+                <label class="je-label je-f14">新密码<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="password" name="NewPassWord" autocomplete="off" placeholder="请输入新密码" class="je-input" checkexpession="NotNull" checkname="新密码" isvalidate="true" maxlength="20">
+                </div>
+            </div>
+
+            <div class="je-form-item">
+                <label class="je-label je-f14">重复密码<font color="red">*</font></label>
+                <div class="je-inputbox">
+                    <input type="password" name="RePassWord" autocomplete="off" placeholder="请输入重复密码" class="je-input" maxlength="20" checkexpession="NotNull" checkname="重复密码" isvalidate="true">
+                </div>
+            </div>
+            <div class="je-form-item je-f14">
+                <label class="je-label je-f14"></label>
+                <button class="je-btn" id="btnOk">提 交</button>
+                <button class="je-btn je-bg-native" id="btnCancel">清 空</button>
+            </div>
+        </form>
+
+    </div>
+
+    </div>
+
+    <script src="{% static 'adminApp/Script/jquery-1.10.2.js' %}"></script>    
+    <script src="{% static 'adminApp/Script/JValidator.js' %}"></script>
+    <script type="text/javascript" src="{% static 'adminApp/jeui/js/modules/jeui.js' %}"></script>
+    <script type="text/javascript">
+        jeui.use(["jeBox"], function () {
+            $('#btnOk').click(function () {
+                if (!ValidatePass($("#form1"))) {
+                    return false;
+                }
+                var oldpwd = $("input[name=OldPassWord]").val();
+                var newpwd = $("input[name=NewPassWord]").val();
+                var repwd = $("input[name=RePassWord]").val();
+                if (newpwd.length < 6) {
+                    jeBox.msg("密码长度不能少于6位", { icon: 1, time: 1.5 });
+                    return false;
+                }
+                if (newpwd != repwd) {
+                    jeBox.msg("两次密码不一致", { icon: 1, time: 1.5 });
+                    return false;
+                }
+
+                $.post("/admin/pwd/password", { OldPwd: oldpwd, NewPwd: newpwd,csrfmiddlewaretoken: '{{ csrf_token }}' }, function (result) {
+                    console.log(result);
+                    if (result.Result) {
+                        jeBox.msg(result.Message, { icon: 2, time: 1.5 });
+                        setTimeout(function () { location.reload(); }, 1500);
+                    }
+                    else {
+                        jeBox.msg(result.Message, { icon: 3, time: 1.5 });
+                    }
+                    
+                });
+                return false;
+            });
+        });
+    </script>
+
+</body>
+</html>

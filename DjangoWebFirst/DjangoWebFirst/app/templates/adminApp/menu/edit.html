@@ -31,13 +31,17 @@
                 <div class="je-inputbox">
                     <select name="ParentId">
                         <option value="0">无父级</option>
-                        {% for item in listData %}
-                           {% if  item.KeyId == Model.ParentId %}
-                            <option value="{{item.KeyId}}" selected >{{item.FullName}}</option>
-                           {% else %}
-                           <option value="{{item.KeyId}}">{{item.FullName}}</option>
-                           {% endif%}                        
-                        {% endfor %}
+                        {% for items in listData %}
+                          <option value="{{items.KeyId}}">{{items.FullName}}</option>
+
+                           {% for item in menuListCh %}
+                             {% if items.KeyId == item.ParentId and item.KeyId == Model.ParentId %}                               
+                                   <option value="{{item.KeyId}}" selected ><lable>&nbsp;&nbsp;&nbsp;&nbsp;</lable>{{item.FullName}}</option>
+                             {% elif items.KeyId == item.ParentId %}
+                                  <option value="{{item.KeyId}}"  ><lable>&nbsp;&nbsp;&nbsp;&nbsp;</lable>{{item.FullName}}</option>
+                             {% endif%}     
+                          {% endfor %}
+                       {% endfor %}
                        
                     </select>
                 </div>

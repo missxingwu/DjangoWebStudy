@@ -40,6 +40,7 @@ def adminlogin(request):
              user = serializers.serialize("json", models.Sys_User.objects.filter(Account=Account))
              user2 = userModel.toJSONDateTime()
              request.session[settings.ADMIN_SESSION] = user
+             request.session["ceshisession"] = user2
              Result = True
           else:
               Result = False
