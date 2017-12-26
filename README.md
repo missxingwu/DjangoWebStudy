@@ -286,3 +286,9 @@
                         transaction.savepoint_rollback(sid)
                         # open transaction now contains only a.save()
 			 
+
+14.0 django 图片显示
+
+     在 django 中不像.net 那样有根目录的概念 而取而代之的是包的概念， 通过URLS.PY 来提供每个URL 对应的DJANGO的 函数来显示页面 
+　　 在包的 temolates目录中 的html页面里面 是不能直接写图片 或者 CSS JS 文件的 相对|绝对 路径的 ， 而是用 URLS 提供的URL对应 图片/js/css 目录的 
+     列：参考 url 和 settings  列子

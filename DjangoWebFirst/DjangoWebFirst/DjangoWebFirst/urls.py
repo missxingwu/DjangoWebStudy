@@ -13,23 +13,31 @@ import app.role_list
 import app.user_list
 import app.button_list
 import app.views_menu
+from django.views.static import serve
+
+from django.conf.urls.static import static
+from django.conf import settings
 
 # Uncomment the next lines to enable the admin:
 from django.conf.urls import include
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = [
-    # Examples:
+
+urlpatterns = [# Examples:
     url(r'^$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
+    url(r'^admin/upload$', app.views.upload_file, name='upload'), 
+    #url(r'^medias/(?P<path>.*)$', serve, {'document_root': "D:\\save\\Pythons\\DjangoWebStudy\\DjangoWebFirst\\DjangoWebFirst\\static\\adminApp\\pic"}), 
     #url(r'^adminlogin', app.views.adminlogin, name='adminlogin'),
-    #url(r'^UpgradeBrowser', app.views.UpgradeBrowser, name='UpgradeBrowser'),
+    #url(r'^UpgradeBrowser', app.views.UpgradeBrowser,
+    #name='UpgradeBrowser'),upload
     url(r'^admin/index', app.adminviews.home, name='index'),
     url(r'^admin/main', app.adminviews.main, name='main'),
     url(r'^admin/role', app.adminviews.role, name='role'),  
     url(r'^admin/user', app.adminviews.user, name='user'), 
+  
 
     # 角色管理
     url(r'^admin/perm/permissions$',app.role_list.permissions,name='permissions'),
@@ -94,5 +102,7 @@ urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
-]
+    url(r'^admin/', include(admin.site.urls)),]
+
+# 图片显示路径
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)  

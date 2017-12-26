@@ -12,7 +12,7 @@ class UserMenuManager(models.Manager):
         from django.db import connection
         cursor = connection.cursor()
         cursor.execute("""
-            SELECT a.RoleId,a.UserId as AccountId,d.*
+            SELECT distinct a.RoleId,a.UserId as AccountId,d.*
             FROM app_sys_userrole a 
             join app_Sys_Role b on a.RoleId=b.KeyId
             join app_Sys_RoleMenu c on c.RoleId=a.RoleId

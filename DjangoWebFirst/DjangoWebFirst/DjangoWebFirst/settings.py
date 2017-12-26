@@ -13,8 +13,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import posixpath
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#  图片显示 url 
+MEDIA_URL = '/medias/'
+#  图片显示路径，具体保存文件的路径
+MEDIA_ROOT = os.path.join('static','adminApp','pic')
 
 
 # Quick-start development settings - unsuitable for production
@@ -53,7 +58,7 @@ ROOT_URLCONF = 'DjangoWebFirst.urls'
 
 TEMPLATES = [{
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': ['django.template.context_processors.debug',

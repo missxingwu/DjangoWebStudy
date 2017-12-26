@@ -12,6 +12,15 @@ from django.contrib.auth.hashers import make_password, check_password
 from app import models
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.conf import settings
+
+from django.shortcuts import redirect
+from django.shortcuts import HttpResponse
+import os
+import sys
+sys.path.append('app/ListTimeToJSon')
+
+import JsonHelp
 
 
 def home(request):
@@ -78,7 +87,6 @@ def adminlogin(request):
        return JsonResponse(name_dict)
        # 重定向
        #return HttpResponseRedirect('/')
-
 def UpgradeBrowser(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -88,3 +96,30 @@ def UpgradeBrowser(request):
 def fontawesome(request):
     """图标管理"""
     return render(request, 'font-awesome.html')
+
+
+
+def upload_file(request):
+    returnVal = ""
+    Result = False
+    Msg = ""
+    username = request.POST.get('username')
+    try:
+         fafafa = request.FILES.get('HeadImgFile')   
+         fileName = datetime.now().strftime('%Y%m%d%H%M%S') + JsonHelp.RandomPass().default(6)
+         fileName = fileName + "." + fafafa.name.split(".")[1]         
+         img_path = os.path.join("static","adminApp","pic",fileName)
+         with open(img_path,'wb') as f:
+             for item in fafafa.chunks():
+               f.write(item)
+         Result = True
+         returnVal = "/medias/" + fileName
+    
+    except Exception as err:
+           Msg = err.args
+
+    name_dict = {'Result': Result, 'Msg': Msg,'ReturnVal':returnVal}
+    return JsonResponse(name_dict)
+
+
+    

@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/DjangoWebFirst/DjangoWebFirst/static/adminApp/pic/20171226121212231846.png
+/DjangoWebFirst/DjangoWebFirst/static/adminApp/pic/20171226110954820756.png
+/DjangoWebFirst/DjangoWebFirst/static/adminApp/pic/20171226110802178625.png

@@ -29,7 +29,7 @@ def adminlogin(request):
        PassWord = form["PassWord"]
        # 加密
        pwd = make_password(PassWord)
-       # 对比明文和密码是否相同  
+       # 对比明文和密码是否相同
        ck = check_password("12", pwd)
 
        # 验证是否存在用户此 Django自带
@@ -74,8 +74,21 @@ def home(request):
         return HttpResponseRedirect('/adminlogin')
     
     allMenus = models.Sys_Menu.objects.with_counts()
-    topMenus = list(filter(lambda x: x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == True,allMenus))
-    leftMenus = list(filter(lambda x: x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == False,allMenus))
+    # 筛选顶部菜单并去重
+    topMenuss = list(set(filter(lambda x: x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == True,allMenus)))
+    topMenus = []
+    for x in allMenus:
+        if x not in topMenus:
+            if x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == True:
+                topMenus.append(x)
+    
+    # 筛选左侧菜单
+    leftMenus = []
+    for x in allMenus:
+       if x not in leftMenus:
+           if x.AccountId == sysUser.KeyId and x.IsDeleted == False and x.IsRoot == False:
+               leftMenus.append(x)
+
     if sysUser.HeadImg is None or sysUser.HeadImg == "":
         sysUser.HeadImg = "/Content/jeui/images/photo2.jpg"
     
