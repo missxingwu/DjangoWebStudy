@@ -35,7 +35,7 @@
 	  {% load staticfiles %}
       <link rel="icon" href="{% static 'adminApp/Image/monkey-48.ico' %}">
       <link href="{% static 'adminApp/Login/css/login.css' %}" rel="stylesheet" />
-	2.0 form 表单数据提交 注意CSRF验证,解决方法 <form>{% csrf_token %}</from>
+	2.0 form 表单数据提交 注意CSRF验证,解决方法 <form>{% csrf_token %}</from>, Ajax时补上参数： csrfmiddlewaretoken: '{{ csrf_token }}' 
 	3.0 from django.contrib.auth.hashers import make_password, check_password  Django 加密解密，每次生成的密码都是一样的，加密：  make_password(PassWord)，解密：check_password("12", pwd) 明文和明文对比，返回True Or False
 
 6.0 Django Session
